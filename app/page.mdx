@@ -4,7 +4,7 @@ The acoustoelectric effect (AE) allows us to precisely target tiny areas—as sm
 
 <div class="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
 
-Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span class="threecm">3cm</span> spatial regions, due to both the inverse problem and smearing of potentials [1](https://marleyx.com). 
+Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span class="threecm">3cm</span> spatial regions, due to both the inverse problem and smearing of potentials [1](https://marleyx.com).
 
 What if we could do a lot better, say, <span class="onemm">1</span><span class="onemmmm">mm</span> resolution?
 
@@ -32,9 +32,9 @@ We got together to test the effect and build a proof of concept for using AE in 
 
 *Radio analogy of EEG*
 
-Imagine each neuron is an FM radio station, and they’re all blasting their tunes on the same channel. By being closer to one station, you can tune in a bit better, but the noise from all the other ones is still there. This is the problem that we face when recording EEG signals — in order to make good neural prosthetics, we need to be able to read from a tiny subset of the neurons WITHOUT the noise of the others getting in the way. How can we do that? 
+Imagine each neuron is an FM radio station, and they’re all blasting their tunes on the same channel. By being closer to one station, you can tune in a bit better, but the noise from all the other ones is still there. This is the problem that we face when recording EEG signals — in order to make good neural prosthetics, we need to be able to read from a tiny subset of the neurons WITHOUT the noise of the others getting in the way. How can we do that?
 
-Radio stations work by modulating their music with a reference signal, say 90.3 MHz. When you want to tune into that channel, you set your car radio to 90.3 MHz, and receive just that one station’s music. 
+Radio stations work by modulating their music with a reference signal, say 90.3 MHz. When you want to tune into that channel, you set your car radio to 90.3 MHz, and receive just that one station’s music.
 
 Evidently, neurons don't normally "sing" at unique frequencies. But perhaps with external pertubation, we can make them do so, i.e. with ultrasound.
 </div>
@@ -57,9 +57,9 @@ Ultrasound can be focused down to a 1-mm focal point in the brain. By detecting 
 The main technical challenge is that the AE-generated signals are small; people recently worked out the governing equation for acoustoelectric fields (full derivation here):
 
 <img class="w-[250px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/ecf686c6783b6de4a492c0339f978022.png"/>
-where k = 1 x 10^-9 [1/Pa]. 
+where k = 1 x 10^-9 [1/Pa].
 
-This nature paper last year provided a rigorous analysis of AE. Other people have shown AE in phantoms [1], and cardiac activity [2]. 
+This nature paper last year provided a rigorous analysis of AE. Other people have shown AE in phantoms [1], and cardiac activity [2].
 
 
 <div class="mt-24"></div>
@@ -120,16 +120,16 @@ The ultrasound single element probe is held in a 3D printed structure which also
 
 
 #### Phantom
-We used a water tank to model the brain. Water is a good acoustic model of the brain (1524 m/s in water, 1540 m/s in soft tissue), and 0.3% saline is a good conductivity model of the brain. 
+We used a water tank to model the brain. Water is a good acoustic model of the brain (1524 m/s in water, 1540 m/s in soft tissue), and 0.3% saline is a good conductivity model of the brain.
 
 #### Acoustic field
 We used a 500 kHz transducer (50 mm diameter, unfocused; Olympus A301s-SU). The ultrasound was driven straight from an arbitrary function generator (Siglent SDG1032X).
 
 #### Electric field
-The electric field was applied with a pair of copper wires, stripped bare for 5 mm at the ends, with 4.5 mm (1.5 wavelengths) inter-electrode spacing. 
-Crucially, we had to use a second function generator to drive the electric field. When the same function generator was used for both driving the ultrasound and electric field, we saw coupling between the signals that gave rise to a “fake AE” effect, probably due to crosstalk between the function generator channels. The Siglent SDG1032X has -60 dBc of channel crosstalk which is greater than the AE effect that we observed.
+The electric field was applied with a pair of copper wires, stripped bare for 5 mm at the ends, with 4.5 mm (1.5 wavelengths) inter-electrode spacing.
+Crucially, we had to use a second function generator to drive the electric field. When the same function generator was used for both driving the ultrasound and electric field, we saw coupling between the signals that gave rise to a “fake AE” effect, probably due to crosstalk between the function generator channels. The Siglent SDG1032X has -60 dBc of channel crosstalk which is greater than the AE effect that we observed. We also saw coupling from the signal generator to the lock in amplifier when they were powered on the same circuit, beyond just the manufacturer quoted -60dBc we also encountered some level of test setup related coupling and interference between wires. Steps were taken to mitigate this by twisting wires together to reduce EMI and shielding where appropriate.
 
-We drove the function generator with 20V peak-to-peak, giving rise to a potential of 19.5V peak-to-peak across the electrodes. Our function generator has a finite output impedance of 50 Ohm and given the voltage drop would suggest the electrical resistance of the solution is around 1kOhm. 
+We drove the function generator with 20V peak-to-peak, giving rise to a potential of 19.5V peak-to-peak across the electrodes. Our function generator has a finite output impedance of 50 Ohm and given the voltage drop would suggest the electrical resistance of the solution is around 1kOhm at 100 Hz.
 
 #### Pressure Recording
 We used an 0.5 mm needle hydrophone (Onda HNR 0500) to measure the incident pressure wave generated from the transducer. Given the hydrophone’s small size profile at the recording tip, we could localize where in space the pressure reached its maxima, and place our AE pickup electrodes at this position.
@@ -190,7 +190,7 @@ The resin printed lenses were the best. The wax casted ones were difficult to ma
 <img width="300px" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/4f130df53537fd445b4c8e1a2fa663bf.png"/>
 Analog signals are riddled with environmental noise—namely, thermal noise, line noise, and 1/f noise. We expect the acoustoelectric signal to be very small (on the order of nanovolts to microvolts), so naive, direct measurements will result in our signal being drowned out by noise.
 
-By using the acoustoelectric effect, we've shifted our signal to 500 kHz, away from most sources of noise. We can use filters to get rid of noise contributions outside of this band. We expect the noise to be mostly thermal (white noise) in the bandwidth of interest. 
+By using the acoustoelectric effect, we've shifted our signal to 500 kHz, away from most sources of noise. We can use filters to get rid of noise contributions outside of this band. We expect the noise to be mostly thermal (white noise) in the bandwidth of interest and of course the all present 60 Hz noise from the grid.
 
 Lock-in amplifiers are extreme examples of frequency-selective filters. Say our signal of interest occurs around a particular frequency f with some bandwidth b, but that this signal is polluted by lots of noise from various regions of the frequency spectrum. Our AE signal is such a signal, occurring only around the ultrasound frequency with bandwidth determined by EEG signal bandwidth. If we multiply this signal with another sinusoidal signal with frequency f through the use of an analog mixer, then we are able to produce a modulated signal. In this modulated signal, a large principal component of the signal would be in the original frequency band around f, but two side bands would also occur: one at the difference of the two input frequencies, and another at the sum (recall trig identities of multiplying two sinusoids!), which in this case are around 0 and 2f. By using a low-pass filter on this modulated output, we can strictly select for the component of the modulated signal around 0Hz.
 
