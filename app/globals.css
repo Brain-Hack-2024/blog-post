@@ -51,8 +51,13 @@ h1 {
   position: relative;
 }
 
+.comic {
+  color: red;
+  font-family: "Comic Neue", sans-serif;
+}
 .annotation {
   position: absolute;
+  margin-top: -2em;
   left: 100%;
   width: 200px;
   font-size: 12px;
@@ -92,6 +97,8 @@ h3 {
 }
 h3 {
   color: green;
+  margin-bottom: 1rem;
+  @apply mt-24;
 }
 h4 {
   font-weight: bold;

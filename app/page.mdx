@@ -1,15 +1,16 @@
-<div class="max-w-2xl ml-[20vw] mt-8 md:mt-24 mb-36 px-8">
+<div class="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-8">
 {/* # We have 🔬<span class="text-sm">(acoustoelectric)</span> at 🏠<span class="text-sm">(home)</span> */}
-The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use focused ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces (BCI's) with 27,000x higher resolution.
+The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use focused ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution.
 
 <div class="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
 
-Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span class="threecm">3cm</span> spatial regions, due to both the inverse problem and smearing of potentials [1](https://marleyx.com).
+Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span class="threecm">3cm</span> spatial regions, due to both the inverse problem and smearing of potentials*.<div class="annotation">
+_the inverse problem_: 3D brain activity mapped to a 2D measurement surface of the scalp will always lose information<div class="pt-2">_smearing of potentials_: tissues are conductive, so current spreads out</div></div>
 
 What if we could do a lot better, say, <span class="onemm">1</span><span class="onemmmm">mm</span> resolution?
 
 {/* <img class="m-auto w-[400px] py-5" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/5ca6d25d4010dee34bee9696a9674346.jpeg"/> */}
-<figure class="m-auto w-[450px] py-5 pb-20">
+<figure class="m-auto max-w-[450px] py-5 pb-20">
 <img class="" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/15099f7c38a842e897fb9642f869f15a.png"/>
 <figcaption>Comparison of resolution with regular EEG and with acoustelectric imaging. Figure is representative; we expect brain data to look very different! </figcaption>
 </figure>
@@ -26,7 +27,7 @@ We got together to test the effect and build a proof of concept for using AE in 
 <img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/4e38f0f1e201060fa011d79f3e261c86.png"/>
 
 </div>
-<div class="radio mx-5">
+<div class="radio">
 
 <div class="text-sm px-12 leading-7">
 
@@ -36,12 +37,11 @@ Imagine each neuron is an FM radio station, and they’re all blasting their tun
 
 Radio stations work by modulating their music with a reference signal, say 90.3 MHz. When you want to tune into that channel, you set your car radio to 90.3 MHz, and receive just that one station’s music.
 
-Evidently, neurons don't normally "sing" at unique frequencies. But perhaps with external pertubation, we can make them do so, i.e. with ultrasound.
+Evidently, neurons don't normally "sing" at unique frequencies. But perhaps with external pertubation—ultrasound—we can make them do so.
 </div>
 
 </div>
 
-<div class="mt-24"></div>
 ### The acoustoelectric effect
 
 The acoustoelectric effect is a phenomenon where ultrasound interacts with electric fields by changing the conductivity of a material.
@@ -52,17 +52,16 @@ By applying ultrasound to a region, you can isolate signals from that particular
 
 <img class="w-[350px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/4c0abdf374decaa95f7e9167beda10f2.jpeg"/>
 
-Ultrasound can be focused down to a 1-mm focal point in the brain. By detecting the acoustoelectrically generated signals, we can in principle obtain the mm-level spatial resolution, and the temporal resolution of EEG.
+Ultrasound can be focused down to a 1-mm focal point in the brain. By detecting the acoustoelectrically generated signals, we can in principle obtain the mm-level spatial resolution with the temporal resolution of EEG.
 
-The main technical challenge is that the AE-generated signals are small; people recently worked out the governing equation for acoustoelectric fields (full derivation here):
+The main technical challenge is that the AE-generated signals are small; people recently worked out the governing equation for acoustoelectric fields (full derivation [here](https://static-content.springer.com/esm/art%3A10.1038%2Fs42005-023-01198-w/MediaObjects/42005_2023_1198_MOESM2_ESM.pdf)):
 
 <img class="w-[250px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/ecf686c6783b6de4a492c0339f978022.png"/>
 where k = 1 x 10^-9 [1/Pa].
 
-This nature paper last year provided a rigorous analysis of AE. Other people have shown AE in phantoms [1], and cardiac activity [2].
+This [Nature](https://www.nature.com/articles/s42005-023-01198-w) paper published last year provided a theoretical foundation for AE. Other people have shown AE in brain [phantoms](https://iopscience.iop.org/article/10.1088/1361-6560/aa6ee7), and imaging of electric currents in the [heart](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8569939/pdf/nihms-1696551.pdf)<div class="annotation"></div>.
 
 
-<div class="mt-24"></div>
 ### Results
 We were able to detect the acoustoelectric effect at very low pressures (~10 kPa), and confirmed that it was indeed acoustoelectric.
 
@@ -72,7 +71,7 @@ We were able to detect the acoustoelectric effect at very low pressures (~10 kPa
 <img class="w-[400px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/e317329953bc427f6693d6a4f5cf0515.png" />
 <figcaption>Magnitude of acoustoelectric effect with varying pressures</figcaption>
 
-Data was obtained by looking at the difference frequency (500 kHz - 135.145 kHz), sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
+Data was obtained by looking at the difference frequency (500 kHz - 135.145 kHz* <div class="annotation">* We chose this frequency arbitrarily—a prime number for good luck.</div>), sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
 
 <img class="w-[350px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/cd39a7aa3e34e449784c4d13be31cc3c.png"/>
 <figcaption>Lock-in amplifier readout over repeated frequency sweeps.</figcaption>
@@ -96,7 +95,6 @@ One idea to lower the noise floor would be to average over many electrodes. The 
 {/* </div> */}
 {/* <div class="methods w-[100vw] max-w-screen-xl mx-auto"> */}
 
-<div class="mt-24"></div>
 ### Methods
 {/* <div class="grid grid-cols-3 grid-flow-row-dense"> */}
 <div class="column">
@@ -127,7 +125,7 @@ We used a 500 kHz transducer (50 mm diameter, unfocused; Olympus A301s-SU). The 
 
 #### Electric field
 The electric field was applied with a pair of copper wires, stripped bare for 5 mm at the ends, with 4.5 mm (1.5 wavelengths) inter-electrode spacing.
-Crucially, we had to use a second function generator to drive the electric field. When the same function generator was used for both driving the ultrasound and electric field, we saw coupling between the signals that gave rise to a “fake AE” effect, probably due to crosstalk between the function generator channels. The Siglent SDG1032X has -60 dBc of channel crosstalk which is greater than the AE effect that we observed. We also saw coupling from the signal generator to the lock in amplifier when they were powered on the same circuit, beyond just the manufacturer quoted -60dBc we also encountered some level of test setup related coupling and interference between wires. Steps were taken to mitigate this by twisting wires together to reduce EMI and shielding where appropriate.
+Crucially, we had to use a <span class="comic">second function generator</span> to drive the electric field. When the same function generator was used for both driving the ultrasound and electric field, we saw coupling between the signals that gave rise to a “fake AE” effect, probably due to crosstalk between the function generator channels. The Siglent SDG1032X has -60 dBc of channel crosstalk which is greater than the AE effect that we observed. We also saw coupling from the signal generator to the lock in amplifier when they were powered on the same circuit, beyond just the manufacturer quoted -60dBc we also encountered some level of test setup related coupling and interference between wires. Steps were taken to mitigate this by twisting wires together to reduce EMI and shielding where appropriate.
 
 We drove the function generator with 20V peak-to-peak, giving rise to a potential of 19.5V peak-to-peak across the electrodes. Our function generator has a finite output impedance of 50 Ohm and given the voltage drop would suggest the electrical resistance of the solution is around 1kOhm at 100 Hz.
 
@@ -195,8 +193,6 @@ By using the acoustoelectric effect, we've shifted our signal to 500 kHz, away f
 Lock-in amplifiers are extreme examples of frequency-selective filters. Say our signal of interest occurs around a particular frequency f with some bandwidth b, but that this signal is polluted by lots of noise from various regions of the frequency spectrum. Our AE signal is such a signal, occurring only around the ultrasound frequency with bandwidth determined by EEG signal bandwidth. If we multiply this signal with another sinusoidal signal with frequency f through the use of an analog mixer, then we are able to produce a modulated signal. In this modulated signal, a large principal component of the signal would be in the original frequency band around f, but two side bands would also occur: one at the difference of the two input frequencies, and another at the sum (recall trig identities of multiplying two sinusoids!), which in this case are around 0 and 2f. By using a low-pass filter on this modulated output, we can strictly select for the component of the modulated signal around 0Hz.
 
 In total, what the above operation achieves is a very tight band-pass filter that gets rid of noise from everywhere but around the frequency of our interest. This in turn greatly boosts our SNR and allows us to confidently detect signals down to the low-nanovolt range, around where we expect to see the AE signal. Furthermore, in the specific context of AE, recall how we added the ultrasound frequency f to our EEG signal, only to subtract it again through the use of the lock-in amplifier. We have effectively demodulated our AE signal back into the normal EEG frequency range, but this time with minimal noise (thanks to the lock-in amplifier) AND with spatial specificity (thanks to the AE effect)! Double wow!
-
-For our experiment, we have used the SR860 lock-in amplifier from Stanford Research Systems.
 
 {/* </div> */}
 </div>
