@@ -1,4 +1,4 @@
-<div class="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-8">
+<div class="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-4 overflow-clip md:overflow-visible">
 {/* # We have 🔬<span class="text-sm">(acoustoelectric)</span> at 🏠<span class="text-sm">(home)</span> */}
 The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use focused ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution.
 
@@ -25,7 +25,7 @@ We got together to test the effect and build a proof of concept for using AE in 
 <img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/568a938de184197cd0e3b0b82c99e458.png"/>
 <img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/22064796cb3f222df17e2de19a9334ef.png"/>
 <img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/4e38f0f1e201060fa011d79f3e261c86.png"/>
-
+<img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/dfbdd8064e57cf8f50553a05d052d635.png"/>
 </div>
 <div class="radio">
 
@@ -59,7 +59,7 @@ The main technical challenge is that the AE-generated signals are small; people 
 <img class="w-[250px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/ecf686c6783b6de4a492c0339f978022.png"/>
 where k = 1 x 10^-9 [1/Pa].
 
-This [Nature](https://www.nature.com/articles/s42005-023-01198-w) paper published last year provided a theoretical foundation for AE. Other people have shown AE in brain [phantoms](https://iopscience.iop.org/article/10.1088/1361-6560/aa6ee7), and imaging of electric currents in the [heart](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8569939/pdf/nihms-1696551.pdf)<div class="annotation"></div>.
+This [Nature](https://www.nature.com/articles/s42005-023-01198-w) paper published last year provided a theoretical foundation for AE. Other people have shown AE in brain phantoms [[1]](https://iopscience.iop.org/article/10.1088/1361-6560/aa6ee7), and imaging of electric currents in the heart [[2]](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8569939/pdf/nihms-1696551.pdf).
 
 
 ### Results
@@ -67,11 +67,11 @@ We were able to detect the acoustoelectric effect at very low pressures (~10 kPa
 
 
 {/* The AE effect’s governing equation hints at a linear relationship between the applied electric field and the measured AE signal (as well as that for applied pressure). If we were to extrapolate what localized EEG signal amplitudes (20-100µV) would produce in AE signal amplitudes, we get an expected AE signal amplitude of approximately 80 pV per MPa pressure (extrapolated from 1625 nV measured at 50 kPa pressure and 20 Vpp electrical signal, applied to 50 µV localized EEG signal).  */}
-
+<figure class="w-[400px]">
 <img class="w-[400px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/e317329953bc427f6693d6a4f5cf0515.png" />
-<figcaption>Magnitude of acoustoelectric effect with varying pressures</figcaption>
-
-Data was obtained by looking at the difference frequency (500 kHz - 135.145 kHz* <div class="annotation">* We chose this frequency arbitrarily—a prime number for good luck.</div>), sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
+<figcaption>Magnitude of acoustoelectric effect with varying pressures. Each color is a different location in the acoustic field.</figcaption>
+</figure>
+Data was obtained by looking at the difference frequency (500 kHz - 135.145 kHz*), <div class="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
 
 <img class="w-[350px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/cd39a7aa3e34e449784c4d13be31cc3c.png"/>
 <figcaption>Lock-in amplifier readout over repeated frequency sweeps.</figcaption>
@@ -134,14 +134,14 @@ We used an 0.5 mm needle hydrophone (Onda HNR 0500) to measure the incident pres
 </div>
 
 <div class="column">
-
-<i class="interlude">Interlude: speed of sound</i>
-
+<div class="note">
+<div class="interlude">Interlude: speed of sound</div>
 As a side-note, our setup also allowed us to measure the speed of sound in our saltwater medium. By recording from both the transducer’s driving signal generator and the hydrophone simultaneously, you can see the time delay between the start of the transducer sending out its acoustic waves and the hydrophone receiving this signal. By measuring the distance between the hydrophone and the transducer, and dividing this distance by the time delay, we can determine the speed of sound.
 <figure class="m-auto w-[300px] py-5">
 <img class="m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/6ff9ce5fa47a801aa8f87570c11ece16.png"/>
 <figcaption>Purple: transducer driving signal. Yellow: hydrophone pickup signal. Time is along the x-axis.</figcaption>
 </figure>
+</div>
 </div>
 
 #### Acoustic Lenses

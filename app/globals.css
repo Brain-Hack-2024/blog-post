@@ -63,7 +63,7 @@ h1 {
   font-size: 12px;
   line-height: 1.4;
   color: #666;
-  padding-left: 30px;
+  padding-left: 40px;
   text-align: left;
 }
 
@@ -150,12 +150,18 @@ body {
 a {
   border-bottom: 1px dotted rgba(34, 34, 34, 0.69);
 }
-
+.note {
+  border-left: 2px solid #ccc;
+  padding: 10px 30px;
+  margin: 20px 0;
+  background-color: #f5f5f5;
+}
 .interlude {
   /* font-family: 'IBM Plex Mono', monospace; */
   font-family: "Lora", serif;
   font-size: 16px;
-  border-bottom: 1px solid #ccc;
+  font-style: italic;
+  font-weight: bold;
   /* text-decoration: underline; */
 }
 ul {
