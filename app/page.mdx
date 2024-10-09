@@ -1,10 +1,10 @@
 <div class="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-4 overflow-clip md:overflow-visible">
 {/* # We have 🔬<span class="text-sm">(acoustoelectric)</span> at 🏠<span class="text-sm">(home)</span> */}
-The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use focused ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution.
+The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution than EEG.
 
 <div class="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
 
-Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span class="threecm">3cm</span> spatial regions, due to both the inverse problem and smearing of potentials*.<div class="annotation">
+Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span class="threecm">3cm</span> spatial regions, due to smearing of potentials*.<div class="annotation">
 _the inverse problem_: 3D brain activity mapped to a 2D measurement surface of the scalp will always lose information<div class="pt-2">_smearing of potentials_: tissues are conductive, so current spreads out</div></div>
 
 What if we could do a lot better, say, <span class="onemm">1</span><span class="onemmmm">mm</span> resolution?
@@ -12,10 +12,10 @@ What if we could do a lot better, say, <span class="onemm">1</span><span class="
 {/* <img class="m-auto w-[400px] py-5" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/5ca6d25d4010dee34bee9696a9674346.jpeg"/> */}
 <figure class="m-auto max-w-[450px] py-5 pb-20">
 <img class="" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/15099f7c38a842e897fb9642f869f15a.png"/>
-<figcaption>Comparison of resolution with regular EEG and with acoustelectric imaging. Figure is representative; we expect brain data to look very different! </figcaption>
+<figcaption>Comparison of resolution with regular EEG and with acoustoelectric imaging. Figure is representative; we expect brain data to look very different! </figcaption>
 </figure>
 
-We got together to test the effect and build a proof of concept for using AE in brain imaging. So all this was done in 10 days of hacking.
+We got together to test the effect and build a proof of concept for using AE in brain imaging. All this was done in 10 days of hacking.
 
 <div class="flex h-[250px] my-20 gap-2 ml-[-20vw]">
 {/* <img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/02ac940773004f0cc5b88c67b4893afc.png"/> */}
@@ -31,7 +31,7 @@ We got together to test the effect and build a proof of concept for using AE in 
 
 <div class="text-sm px-12 leading-7">
 
-*Radio analogy of EEG*
+*Radio analogy of AE*
 
 Imagine each neuron is an FM radio station, and they’re all blasting their tunes on the same channel. By being closer to one station, you can tune in a bit better, but the noise from all the other ones is still there. This is the problem that we face when recording EEG signals — in order to make good neural prosthetics, we need to be able to read from a tiny subset of the neurons WITHOUT the noise of the others getting in the way. How can we do that?
 
@@ -48,7 +48,7 @@ The acoustoelectric effect is a phenomenon where ultrasound interacts with elect
 <img class="w-[300px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/a2fedc6eb41684e34c637596d8cf4fda.jpeg"/>
 <figcaption>Sketch map of acousto-electric effect <a href="https://www.researchgate.net/figure/Sketch-map-of-acousto-electric-effect_fig2_313809543">[source]</a></figcaption>
 
-By applying ultrasound to a region, you can isolate signals from that particular region by looking for modulation at the ultrasound frequency — typically > 500 kHz.
+By applying ultrasound to a region and measuring electrical signals on the scalp, you can isolate signals from that particular region by looking for modulation at the ultrasound frequency — typically > 500 kHz.
 
 <img class="w-[350px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/3512f061369748337c288b33b2845a66.png"/>
 
@@ -71,7 +71,7 @@ We were able to detect the acoustoelectric effect at very low pressures (~10 kPa
 <img class="w-[400px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/e317329953bc427f6693d6a4f5cf0515.png" />
 <figcaption>Magnitude of acoustoelectric effect with varying pressures. Each color is a different location in the acoustic field.</figcaption>
 </figure>
-Data was obtained by looking at the difference frequency (500 kHz - 135.145 kHz*), <div class="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
+Data was obtained by looking at the difference frequency (500 kHz minus 135.145 kHz*), <div class="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
 
 <img class="w-[350px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/cd39a7aa3e34e449784c4d13be31cc3c.png"/>
 <figcaption>Lock-in amplifier readout over repeated frequency sweeps.</figcaption>
