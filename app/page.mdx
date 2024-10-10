@@ -17,17 +17,17 @@ import lockInAmplifierSetup from '/public/ae/lock_in_amplifier_setup.png'
 import lockInPictureResults from '/public/ae/lock_in_picture_results.png'
 
 <div className="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-4 overflow-clip md:overflow-visible">
-{/* # We have 🔬<span class="text-sm">(acoustoelectric)</span> at 🏠<span class="text-sm">(home)</span> */}
+{/* # We have 🔬<span className="text-sm">(acoustoelectric)</span> at 🏠<span className="text-sm">(home)</span> */}
 The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution than EEG.
 
-<div class="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
+<div className="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
 
-Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span class="threecm">3cm</span> spatial regions, due to smearing of potentials*.<div class="annotation">
-_the inverse problem_: 3D brain activity mapped to a 2D measurement surface of the scalp will always lose information<div class="pt-2">_smearing of potentials_: tissues are conductive, so current spreads out</div></div>
+Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span className="threecm">3cm</span> spatial regions, due to smearing of potentials*.<div className="annotation">
+_the inverse problem_: 3D brain activity mapped to a 2D measurement surface of the scalp will always lose information<div className="pt-2">_smearing of potentials_: tissues are conductive, so current spreads out</div></div>
 
-What if we could do a lot better, say, <span class="onemm">1</span><span class="onemmmm">mm</span> resolution?
+What if we could do a lot better, say, <span className="onemm">1</span><span className="onemmmm">mm</span> resolution?
 
-{/* <img class="m-auto w-[400px] py-5" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/5ca6d25d4010dee34bee9696a9674346.jpeg"/> */}
+{/* <img className="m-auto w-[400px] py-5" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/5ca6d25d4010dee34bee9696a9674346.jpeg"/> */}
 <figure className="m-auto max-w-[450px] py-5 pb-20">
   <Image
     src={eegResolution}
@@ -46,9 +46,9 @@ We got together to test the effect and build a proof of concept for using AE in 
   <Image src={acoustoElectricSignals4} alt="Acousto-electric signal 4" />
   <Image src={acoustoElectricSignals5} alt="Acousto-electric signal 5" />
 </div>
-<div class="radio">
+<div className="radio">
 
-<div class="text-sm px-12 leading-7">
+<div className="text-sm px-12 leading-7">
 
 *Radio analogy of AE*
 
@@ -83,9 +83,13 @@ Ultrasound can be focused down to a 1-mm focal point in the brain. By detecting 
 
 The main technical challenge is that the AE-generated signals are small; people recently worked out the governing equation for acoustoelectric fields (full derivation [here](https://static-content.springer.com/esm/art%3A10.1038%2Fs42005-023-01198-w/MediaObjects/42005_2023_1198_MOESM2_ESM.pdf)):
 
-{/* Todo: Replace with math */}
-<img class="w-[250px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/ecf686c6783b6de4a492c0339f978022.png"/>
-where k = 1 x 10^-9 [1/Pa].
+The governing equation for acoustoelectric fields is:
+
+$$
+\nabla \cdot \mathbf{E}_{\text{ae}} = -k \nabla P \cdot \mathbf{E}_o
+$$
+
+where $k = 1 \times 10^{-9} \, \text{Pa}^{-1}$.
 
 This [Nature](https://www.nature.com/articles/s42005-023-01198-w) paper published last year provided a theoretical foundation for AE. Other people have shown AE in brain phantoms [[1]](https://iopscience.iop.org/article/10.1088/1361-6560/aa6ee7), and imaging of electric currents in the heart [[2]](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8569939/pdf/nihms-1696551.pdf).
 
@@ -103,7 +107,7 @@ We were able to detect the acoustoelectric effect at very low pressures (~10 kPa
 />
 <figcaption>Magnitude of acoustoelectric effect with varying pressures. Each color is a different location in the acoustic field.</figcaption>
 </figure>
-Data was obtained by looking at the difference frequency (500 kHz minus 135.145 kHz*), <div class="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
+Data was obtained by looking at the difference frequency (500 kHz minus 135.145 kHz*), <div className="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
 
 <Image
   className="w-[350px] m-auto"
@@ -118,10 +122,10 @@ We measured 120 mV at the frequency of the driving electric field, and 1625 nV a
 
 Brain signals have a magnitude of 10-100 µV within the 0-10 Hz bandwidth at the surface of the scalp, so we expect the AE signal to have a magnitude of 2.7-27 nV per MPa. From the picture of the lock-in amplifier, our noise floor was about 100 nV, so about 1-2 orders of magnitude of noise reduction would be necessary to capture AE signals from the brain.
 
-Is this doable? From an electronics perspective, very low-noise preamplifiers exist with less than 1 nV/√Hz noise*. <div class="annotation">*Samuel Groner, [A low noise laboratory-grade measurement preamplifier
-](https://linearaudio.net/low-noise-laboratory-grade-measurement-preamplifier)</div>The more fundamental bound of our noise floor comes from Johnson noise in the brain itself, which is 4.5 nV/√Hz. Assuming a bandwidth of 10 Hz, this gives a noise floor of 14 nV, which would make the AE signal just barely detectable.
+Is this doable? From an electronics perspective, very low-noise preamplifiers exist with less than $1 \, \text{nV}/\sqrt{\text{Hz}}$ noise*. <div className="annotation">*Samuel Groner, [A low noise laboratory-grade measurement preamplifier
+](https://linearaudio.net/low-noise-laboratory-grade-measurement-preamplifier)</div>The more fundamental bound of our noise floor comes from Johnson noise in the brain itself, which is $4.5 \, \text{nV}/\sqrt{\text{Hz}}$. Assuming a bandwidth of 10 Hz, this gives a noise floor of 14 nV, which would make the AE signal just barely detectable.
 
-One idea to lower the noise floor would be to average over many electrodes. The uncorrelated Johnson noise would decrease as √N in the number of electrodes, while the correlated AE signal would increase linearly with N.
+One idea to lower the noise floor would be to average over many electrodes. The uncorrelated Johnson noise would decrease as $\sqrt{N}$ in the number of electrodes, while the correlated AE signal would increase linearly with N.
 
 
 
@@ -129,11 +133,11 @@ One idea to lower the noise floor would be to average over many electrodes. The 
 
 {/* This signal amplitude is quite low. It may be difficult to realize this measurement in humans for spatially localized EEG measurements, unless the acoustoelectric coupling constant can be increased. Note that safe maximum ultrasound pressure exposure limit is around 1 MPa, meaning continuous exposure limits would be even lower, meaning that in practical settings, naive AE measurements done within these exposure limits would likely result in AE signal amplitudes lower than 80 pV, which is difficult to detect even with lock-in amplifiers. For future experiments, it may be crucial to develop agents that could help increase the acoustoelectric coupling constant within the brain (perhaps infusable via the blood vessels). */}
 {/* </div> */}
-{/* <div class="methods w-[100vw] max-w-screen-xl mx-auto"> */}
+{/* <div className="methods w-[100vw] max-w-screen-xl mx-auto"> */}
 
 ### Methods
-{/* <div class="grid grid-cols-3 grid-flow-row-dense"> */}
-<div class="column">
+{/* <div className="grid grid-cols-3 grid-flow-row-dense"> */}
+<div className="column">
 #### Overview
 Our home setup was very... bare-bones. We had no Faraday cage, no filtering, no pre-amp, not even an amplifier for the driving the transducer or applied electric field. We were able to get by by using continuous-wave ultrasound and with the magic of a _lock-in amplifier_. This handsome boy that we got on Ebay for $5k:
 <Image
@@ -168,7 +172,7 @@ We used a 500 kHz transducer (50 mm diameter, unfocused; Olympus A301s-SU). The 
 
 #### Electric field
 The electric field was applied with a pair of copper wires, stripped bare for 5 mm at the ends, with 4.5 mm (1.5 wavelengths) inter-electrode spacing.
-Crucially, we had to use a <span class="comic">second function generator</span> to drive the electric field. When the same function generator was used for both driving the ultrasound and electric field, we saw coupling between the signals that gave rise to a “fake AE” effect, probably due to crosstalk between the function generator channels. The Siglent SDG1032X has -60 dBc of channel crosstalk which is greater than the AE effect that we observed. We also saw coupling from the signal generator to the lock in amplifier when they were powered on the same circuit, beyond just the manufacturer quoted -60dBc we also encountered some level of test setup related coupling and interference between wires. Steps were taken to mitigate this by twisting wires together to reduce EMI and shielding where appropriate.
+Crucially, we had to use a <span className="comic">second function generator</span> to drive the electric field. When the same function generator was used for both driving the ultrasound and electric field, we saw coupling between the signals that gave rise to a “fake AE” effect, probably due to crosstalk between the function generator channels. The Siglent SDG1032X has -60 dBc of channel crosstalk which is greater than the AE effect that we observed. We also saw coupling from the signal generator to the lock in amplifier when they were powered on the same circuit, beyond just the manufacturer quoted -60dBc we also encountered some level of test setup related coupling and interference between wires. Steps were taken to mitigate this by twisting wires together to reduce EMI and shielding where appropriate.
 
 We drove the function generator with 20V peak-to-peak, giving rise to a potential of 19.5V peak-to-peak across the electrodes. Our function generator has a finite output impedance of 50 Ohm and given the voltage drop would suggest the electrical resistance of the solution is around 1kOhm at 100 Hz.
 
@@ -176,9 +180,9 @@ We drove the function generator with 20V peak-to-peak, giving rise to a potentia
 We used an 0.5 mm needle hydrophone (Onda HNR 0500) to measure the incident pressure wave generated from the transducer. Given the hydrophone’s small size profile at the recording tip, we could localize where in space the pressure reached its maxima, and place our AE pickup electrodes at this position.
 </div>
 
-<div class="column">
-<div class="note">
-<div class="interlude">Interlude: speed of sound</div>
+<div className="column">
+<div className="note">
+<div className="interlude">Interlude: speed of sound</div>
 As a side-note, our setup also allowed us to measure the speed of sound in our saltwater medium. By recording from both the transducer’s driving signal generator and the hydrophone simultaneously, you can see the time delay between the start of the transducer sending out its acoustic waves and the hydrophone receiving this signal. By measuring the distance between the hydrophone and the transducer, and dividing this distance by the time delay, we can determine the speed of sound.
 <figure className="m-auto w-[300px] py-5">
 <Image
@@ -198,13 +202,13 @@ Surprisingly, acoustic lenses are hard to obtain. They’re one of those things 
 Thankfully, you can just make your own. The ideal acoustic lens has the same impedance as water, but a different speed of sound. PDMS is perfect, but takes 3 weeks to ship on Amazon. So we went on a hunt for household materials that could be shaped into a sphere. Things we tried:
 
 
-{/* <div class="flex gap-2 pb-10 align-top"> */}
+{/* <div className="flex gap-2 pb-10 align-top"> */}
 {/* <div>
-<img class="object-contain" width="200px" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/0ae081597757e66d4d3c2f6e5a10bb7c.png"/>
+<img className="object-contain" width="200px" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/0ae081597757e66d4d3c2f6e5a10bb7c.png"/>
 </div> */}
 {/* <div> */}
-{/* <img class="pb-2" width="240px" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/27e90d1ede2ad1711fe90004d4a1744e.png"/> */}
-{/* <img class="object-contain" width="240px" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/2f5c9019a6e06cea0cff3b6d1d39306c.png"/> */}
+{/* <img className="pb-2" width="240px" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/27e90d1ede2ad1711fe90004d4a1744e.png"/> */}
+{/* <img className="object-contain" width="240px" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/2f5c9019a6e06cea0cff3b6d1d39306c.png"/> */}
 {/* </div>
 </div> */}
 
@@ -214,7 +218,7 @@ Thankfully, you can just make your own. The ideal acoustic lens has the same imp
 
 After none of the simple options worked, we designed our own to be 3D printed, both out of PLA and resin. Before the 3d prints came in we made molds and casted the lens out of candle wax.
 
-<div class="flex flex-row">
+<div className="flex flex-row">
 <figure>
     <Image
       className="object-contain w-[250px]"
@@ -237,7 +241,7 @@ After none of the simple options worked, we designed our own to be 3D printed, b
 The resin printed lenses were the best. The wax casted ones were difficult to make, and were very dependant on the type of wax used. The FDM printed PLA lenses had some air gaps between the 100% printed infill which causes lots of acoustic reflection.
 
 
-<div class="column">
+<div className="column">
 #### Lock-in amplifier
 
 <Image
@@ -254,7 +258,7 @@ In total, what the above operation achieves is a very tight band-pass filter tha
 
 {/* </div> */}
 </div>
-<div class="column pb-36">
+<div className="column pb-36">
 ### Conclusion
 End scene.
 </div>
