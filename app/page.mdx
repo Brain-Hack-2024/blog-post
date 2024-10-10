@@ -1,4 +1,22 @@
-<div class="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-4 overflow-clip md:overflow-visible">
+import Image from 'next/image'
+import eegResolution from '/public/eeg_resolution.png'
+import acoustoElectricSignals1 from '/public/acousto_electric_signals_1.png'
+import acoustoElectricSignals2 from '/public/acousto_electric_signals_2.png'
+import acoustoElectricSignals3 from '/public/acousto_electric_signals_3.png'
+import acoustoElectricSignals4 from '/public/acousto_electric_signals_4.png'
+import acoustoElectricSignals5 from '/public/acousto_electric_signals_5.png'
+import acoustoelectricEffectSketch from '/public/acoustoelectric_effect_sketch.jpeg'
+import acoustoElectricEffectMagnitude from '/public/acousto_electric_effect_magnitude.png'
+import lockInAmplifierReadout from '/public/lock_in_amplifier_readout.png'
+import sr865aLockInAmplifier from '/public/sr865a_lock_in_amplifier.png'
+import customProbeCloseup from '/public/custom_probe_closeup.png'
+import speedOfSoundMeasurement from '/public/speed_of_sound_measurement.png'
+import lensDesignCrossSection from '/public/lens_design_cross_section.png'
+import moldingLensesWax from '/public/molding_lenses_wax.png'
+import lockInAmplifierSetup from '/public/lock_in_amplifier_setup.png'
+import lockInPictureResults from '/public/lock_in_picture_results.png'
+
+<div className="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-4 overflow-clip md:overflow-visible">
 {/* # We have 🔬<span class="text-sm">(acoustoelectric)</span> at 🏠<span class="text-sm">(home)</span> */}
 The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution than EEG.
 
@@ -10,22 +28,23 @@ _the inverse problem_: 3D brain activity mapped to a 2D measurement surface of t
 What if we could do a lot better, say, <span class="onemm">1</span><span class="onemmmm">mm</span> resolution?
 
 {/* <img class="m-auto w-[400px] py-5" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/5ca6d25d4010dee34bee9696a9674346.jpeg"/> */}
-<figure class="m-auto max-w-[450px] py-5 pb-20">
-<img class="" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/15099f7c38a842e897fb9642f869f15a.png"/>
-<figcaption>Comparison of resolution with regular EEG and with acoustoelectric imaging. Figure is representative; we expect brain data to look very different! </figcaption>
+<figure className="m-auto max-w-[450px] py-5 pb-20">
+  <Image
+    src={eegResolution}
+    alt="Comparison of resolution with regular EEG and with acoustoelectric imaging"
+    layout="responsive"
+  />
+  <figcaption>Comparison of resolution with regular EEG and with acoustoelectric imaging. Figure is representative; we expect brain data to look very different!</figcaption>
 </figure>
 
 We got together to test the effect and build a proof of concept for using AE in brain imaging. All this was done in 10 days of hacking.
 
-<div class="flex h-[250px] my-20 gap-2 ml-[-20vw]">
-{/* <img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/02ac940773004f0cc5b88c67b4893afc.png"/> */}
-{/* <img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/55056ada39c07d82b0ca2de7f48b5870.png"/> */}
-{/* <img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/daa07dbd76a173e33c0c46b9f062183b.png"/> */}
-<img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/578bd3078cb5ab0392dd1637c1f8bbc1.png"/>
-<img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/568a938de184197cd0e3b0b82c99e458.png"/>
-<img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/22064796cb3f222df17e2de19a9334ef.png"/>
-<img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/4e38f0f1e201060fa011d79f3e261c86.png"/>
-<img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/dfbdd8064e57cf8f50553a05d052d635.png"/>
+<div className="flex h-[250px] my-20 gap-2 ml-[-20vw]">
+  <Image src={acoustoElectricSignals1} alt="Acousto-electric signal 1" />
+  <Image src={acoustoElectricSignals2} alt="Acousto-electric signal 2" />
+  <Image src={acoustoElectricSignals3} alt="Acousto-electric signal 3" />
+  <Image src={acoustoElectricSignals4} alt="Acousto-electric signal 4" />
+  <Image src={acoustoElectricSignals5} alt="Acousto-electric signal 5" />
 </div>
 <div class="radio">
 
@@ -45,17 +64,26 @@ Evidently, neurons don't normally "sing" at unique frequencies. But perhaps with
 ### The acoustoelectric effect
 
 The acoustoelectric effect is a phenomenon where ultrasound interacts with electric fields by changing the conductivity of a material.
-<img class="w-[300px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/a2fedc6eb41684e34c637596d8cf4fda.jpeg"/>
+<Image
+  className="w-[300px] m-auto"
+  src={acoustoelectricEffectSketch}
+  alt="Sketch map of acousto-electric effect"
+/>
 <figcaption>Sketch map of acousto-electric effect <a href="https://www.researchgate.net/figure/Sketch-map-of-acousto-electric-effect_fig2_313809543">[source]</a></figcaption>
 
 By applying ultrasound to a region and measuring electrical signals on the scalp, you can isolate signals from that particular region by looking for modulation at the ultrasound frequency — typically > 500 kHz.
 
-<img class="w-[350px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/3512f061369748337c288b33b2845a66.png"/>
+<Image
+  className="w-[350px] m-auto"
+  src={acoustoElectricEffectMagnitude}
+  alt="Acousto-electric effect magnitude"
+/>
 
 Ultrasound can be focused down to a 1-mm focal point in the brain. By detecting the acoustoelectrically generated signals, we can in principle obtain the mm-level spatial resolution with the temporal resolution of EEG.
 
 The main technical challenge is that the AE-generated signals are small; people recently worked out the governing equation for acoustoelectric fields (full derivation [here](https://static-content.springer.com/esm/art%3A10.1038%2Fs42005-023-01198-w/MediaObjects/42005_2023_1198_MOESM2_ESM.pdf)):
 
+{/* Todo: Replace with math */}
 <img class="w-[250px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/ecf686c6783b6de4a492c0339f978022.png"/>
 where k = 1 x 10^-9 [1/Pa].
 
@@ -67,13 +95,21 @@ We were able to detect the acoustoelectric effect at very low pressures (~10 kPa
 
 
 {/* The AE effect’s governing equation hints at a linear relationship between the applied electric field and the measured AE signal (as well as that for applied pressure). If we were to extrapolate what localized EEG signal amplitudes (20-100µV) would produce in AE signal amplitudes, we get an expected AE signal amplitude of approximately 80 pV per MPa pressure (extrapolated from 1625 nV measured at 50 kPa pressure and 20 Vpp electrical signal, applied to 50 µV localized EEG signal).  */}
-<figure class="w-[400px]">
-<img class="w-[400px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/e317329953bc427f6693d6a4f5cf0515.png" />
+<figure className="w-[400px]">
+<Image
+  className="w-[400px] m-auto"
+  src={lockInAmplifierReadout}
+  alt="Magnitude of acoustoelectric effect with varying pressures"
+/>
 <figcaption>Magnitude of acoustoelectric effect with varying pressures. Each color is a different location in the acoustic field.</figcaption>
 </figure>
 Data was obtained by looking at the difference frequency (500 kHz minus 135.145 kHz*), <div class="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
 
-<img class="w-[350px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/cd39a7aa3e34e449784c4d13be31cc3c.png"/>
+<Image
+  className="w-[350px] m-auto"
+  src={lockInPictureResults}
+  alt="Lock-in amplifier readout over repeated frequency sweeps"
+/>
 <figcaption>Lock-in amplifier readout over repeated frequency sweeps.</figcaption>
 
 The presence of the peak helps us confirm the AE effect and reject spurious environmental signal. The peak only appeared when both the ultrasound and electric field were on, and disappeared when the stimulating electrodes were moved out of the ultrasound focus.
@@ -100,13 +136,20 @@ One idea to lower the noise floor would be to average over many electrodes. The 
 <div class="column">
 #### Overview
 Our home setup was very... bare-bones. We had no Faraday cage, no filtering, no pre-amp, not even an amplifier for the driving the transducer or applied electric field. We were able to get by by using continuous-wave ultrasound and with the magic of a _lock-in amplifier_. This handsome boy that we got on Ebay for $5k:
-<img class="w-[300px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/29161be66eef2a346643836b0f67b6a3.png"/>
-<figcaption class="text-center text-sm"><a href="https://www.thinksrs.com/products/sr865a.html?utm_source=Google&utm_medium=cpc&utm_content=432522399963&utm_term=lock-in%20amplifier&utm_campaign=Google:%2018557306696:&wv_initiative=Google:%2018557306696&wv_audience=18557306696&gad_source=1&gclid=CjwKCAjwxY-3BhAuEiwAu7Y6s-9Oo4NlHtP92kKCqWAPYLQCDGcaMryF6LOOcOLbv5UglzuHFxSDexoCa24QAvD_BwE">SR865A — 4 MHz DSP lock-in amplifier</a></figcaption>
+<Image
+  className="w-[300px] m-auto"
+  src={sr865aLockInAmplifier}
+  alt="SR865A — 4 MHz DSP lock-in amplifier"
+/>
+<figcaption className="text-center text-sm"><a href="https://www.thinksrs.com/products/sr865a.html?utm_source=Google&utm_medium=cpc&utm_content=432522399963&utm_term=lock-in%20amplifier&utm_campaign=Google:%2018557306696:&wv_initiative=Google:%2018557306696&wv_audience=18557306696&gad_source=1&gclid=CjwKCAjwxY-3BhAuEiwAu7Y6s-9Oo4NlHtP92kKCqWAPYLQCDGcaMryF6LOOcOLbv5UglzuHFxSDexoCa24QAvD_BwE">SR865A — 4 MHz DSP lock-in amplifier</a></figcaption>
 
 
 Pictured below are; a hydrophone, 4 copper wires in a 2x2 grid, and electrode pads. The hydrophone connects to an oscilloscope, and allows us to locate the highest pressure region. The four copper wires sticking through the holes are the applied electric field. Only two are powered at once using a signal generator. Having four allows us to pick any two and test different directions and locations. Most often the two closest to the hydrophone were used. The electrode pads pickup the modified electric field (due to the acousto-electric effect).
-<img src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/13d06d772f402f9a70aa7467aec08a08.png"/>
-<figcaption class="text-center text-sm">Acousto-electric setup. Custom probe close-up.</figcaption>
+<Image
+  src={customProbeCloseup}
+  alt="Acousto-electric setup. Custom probe close-up."
+/>
+<figcaption className="text-center text-sm">Acousto-electric setup. Custom probe close-up.</figcaption>
 
 
 The ultrasound single element probe is held in a 3D printed structure which also holds the acoustic lens right above it. In the setup, it is positioned at the bottom of the tank facing upwards. This is so we can have our custom probe free to move around from the surface, to locate the point of highest pressure.
@@ -137,8 +180,12 @@ We used an 0.5 mm needle hydrophone (Onda HNR 0500) to measure the incident pres
 <div class="note">
 <div class="interlude">Interlude: speed of sound</div>
 As a side-note, our setup also allowed us to measure the speed of sound in our saltwater medium. By recording from both the transducer’s driving signal generator and the hydrophone simultaneously, you can see the time delay between the start of the transducer sending out its acoustic waves and the hydrophone receiving this signal. By measuring the distance between the hydrophone and the transducer, and dividing this distance by the time delay, we can determine the speed of sound.
-<figure class="m-auto w-[300px] py-5">
-<img class="m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/6ff9ce5fa47a801aa8f87570c11ece16.png"/>
+<figure className="m-auto w-[300px] py-5">
+<Image
+  className="m-auto"
+  src={speedOfSoundMeasurement}
+  alt="Speed of sound measurement"
+/>
 <figcaption>Purple: transducer driving signal. Yellow: hydrophone pickup signal. Time is along the x-axis.</figcaption>
 </figure>
 </div>
@@ -169,12 +216,20 @@ After none of the simple options worked, we designed our own to be 3D printed, b
 
 <div class="flex flex-row">
 <figure>
-    <img class="object-contain w-[250px]" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/a87b2de013402eb78683d57cdab36f7a.png" />
+    <Image
+      className="object-contain w-[250px]"
+      src={lensDesignCrossSection}
+      alt="Cross-section of lens design"
+    />
     <figcaption>Cross-section of lens design</figcaption>
 </figure>
 
 <figure>
-    <img class="object-contain w-[200px]" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/8b532736847cfac0e2520e2f6832a793.png"/>
+    <Image
+      className="object-contain w-[200px]"
+      src={moldingLensesWax}
+      alt="Molding lenses out of wax"
+    />
     <figcaption>Molding lenses out of wax</figcaption>
 </figure>
 </div>
@@ -185,7 +240,10 @@ The resin printed lenses were the best. The wax casted ones were difficult to ma
 <div class="column">
 #### Lock-in amplifier
 
-<img width="300px" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/4f130df53537fd445b4c8e1a2fa663bf.png"/>
+<Image
+  src={lockInAmplifierSetup}
+  alt="Lock-in amplifier setup"
+/>
 Analog signals are riddled with environmental noise—namely, thermal noise, line noise, and 1/f noise. We expect the acoustoelectric signal to be very small (on the order of nanovolts to microvolts), so naive, direct measurements will result in our signal being drowned out by noise.
 
 By using the acoustoelectric effect, we've shifted our signal to 500 kHz, away from most sources of noise. We can use filters to get rid of noise contributions outside of this band. We expect the noise to be mostly thermal (white noise) in the bandwidth of interest and of course the all present 60 Hz noise from the grid.
