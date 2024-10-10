@@ -18,12 +18,13 @@ import lockInPictureResults from '/public/ae/lock_in_picture_results.png'
 
 <div className="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-4 overflow-clip md:overflow-visible">
 {/* # We have 🔬<span className="text-sm">(acoustoelectric)</span> at 🏠<span className="text-sm">(home)</span> */}
+# We have AE at home
+<div class="author">By: Andy Kong, Brian Machado, Ethan Childerhose, Kevin Chung, Marley Xiong</div>
 The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution than EEG.
 
 <div className="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
 
-Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span className="threecm">3cm</span> spatial regions, due to smearing of potentials*.<div className="annotation">
-_the inverse problem_: 3D brain activity mapped to a 2D measurement surface of the scalp will always lose information<div className="pt-2">_smearing of potentials_: tissues are conductive, so current spreads out</div></div>
+Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span className="threecm">3cm</span> spatial regions, due to the smearing of potentials*.<div className="annotation"></div>
 
 What if we could do a lot better, say, <span className="onemm">1</span><span className="onemmmm">mm</span> resolution?
 
@@ -47,7 +48,7 @@ We got together to test the effect and build a proof of concept for using AE in 
 </div>
 <div className="radio">
 
-<div className="text-sm px-12 leading-7">
+<div className="text-sm md:px-12 px-4 leading-7">
 
 *Radio analogy of AE*
 
@@ -84,11 +85,9 @@ The main technical challenge is that the AE-generated signals are small; people 
 
 The governing equation for acoustoelectric fields is:
 
-$$
-\nabla \cdot \mathbf{E}_{\text{ae}} = -k \nabla P \cdot \mathbf{E}_o
-$$
+<img class="w-[250px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/ecf686c6783b6de4a492c0339f978022.png"/>
 
-where $k = 1 \times 10^{-9} \, \text{Pa}^{-1}$.
+where $k = 1 \times 10^{-9} \, \text{Pa}^{-1}$. This corresponds to a modulation of 0.1% per MPa of pressure, in the case of an ideal plane wave.
 
 This [Nature](https://www.nature.com/articles/s42005-023-01198-w) paper published last year provided a theoretical foundation for AE. Other people have shown AE in brain phantoms [[1]](https://iopscience.iop.org/article/10.1088/1361-6560/aa6ee7), and imaging of electric currents in the heart [[2]](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8569939/pdf/nihms-1696551.pdf).
 
@@ -246,10 +245,11 @@ The resin printed lenses were the best. The wax casted ones were difficult to ma
 <Image
   src={lockInAmplifierSetup}
   alt="Lock-in amplifier setup"
+  className="w-[300px]"
 />
-Analog signals are riddled with environmental noise—namely, thermal noise, line noise, and 1/f noise. We expect the acoustoelectric signal to be very small (on the order of nanovolts to microvolts), so naive, direct measurements will result in our signal being drowned out by noise.
+Analog signals are riddled with noise—namely, thermal noise, line noise, and 1/f noise. We expect the acoustoelectric signal to be very small (on the order of nanovolts to microvolts), so naive, direct measurements will result in our signal being drowned out by noise.
 
-By using the acoustoelectric effect, we've shifted our signal to 500 kHz, away from most sources of noise. We can use filters to get rid of noise contributions outside of this band. We expect the noise to be mostly thermal (white noise) in the bandwidth of interest and of course the all present 60 Hz noise from the grid.
+By using the acoustoelectric effect, we've shifted our signal to 500 kHz, away from most sources of noise. We can use filters to get rid of noise contributions outside of this band. We expect the noise to be mostly thermal (white noise) in the bandwidth of interest.
 
 Lock-in amplifiers are extreme examples of frequency-selective filters. Say our signal of interest occurs around a particular frequency f with some bandwidth b, but that this signal is polluted by lots of noise from various regions of the frequency spectrum. Our AE signal is such a signal, occurring only around the ultrasound frequency with bandwidth determined by EEG signal bandwidth. If we multiply this signal with another sinusoidal signal with frequency f through the use of an analog mixer, then we are able to produce a modulated signal. In this modulated signal, a large principal component of the signal would be in the original frequency band around f, but two side bands would also occur: one at the difference of the two input frequencies, and another at the sum (recall trig identities of multiplying two sinusoids!), which in this case are around 0 and 2f. By using a low-pass filter on this modulated output, we can strictly select for the component of the modulated signal around 0Hz.
 
