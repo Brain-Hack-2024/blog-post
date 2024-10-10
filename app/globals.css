@@ -44,8 +44,8 @@ figcaption {
 h1 {
   /* use EB Garramond */
   /* font-family: "EB Garamond", serif; */
-  font-family: "Roboto", sans-serif;
-  @apply text-3xl;
+  /* font-family: "Roboto", sans-serif; */
+  @apply text-2xl font-semibold;
 }
 .annotation-container {
   position: relative;
@@ -67,7 +67,7 @@ h1 {
   text-align: left;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
   .annotation-container {
     position: static;
   }
@@ -96,7 +96,7 @@ h3 {
   /* font-family: 'EB Garamond'; */
 }
 h3 {
-  color: green;
+  @apply text-green-500;
   margin-bottom: 1rem;
   @apply mt-24;
 }
