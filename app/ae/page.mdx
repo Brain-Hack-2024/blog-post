@@ -37,7 +37,7 @@ What if we could do a lot better, say, <span className="onemm">1</span><span cla
     src={eegResolution}
     alt="Comparison of resolution with regular EEG and with acoustoelectric imaging"
   />
-  <figcaption>Comparison of resolution with regular EEG and with acoustoelectric imaging. Figure is representative; we expect brain data to look very different!</figcaption>
+  <figcaption className="figcaption">Comparison of resolution with regular EEG and with acoustoelectric imaging. Figure is representative; we expect brain data to look very different!</figcaption>
 </figure>
 
 We got together to test the effect and build a proof of concept for using AE in brain imaging. All this was done in 10 days of hacking.
@@ -72,7 +72,7 @@ The acoustoelectric effect is a phenomenon where ultrasound interacts with elect
   src={acoustoelectricEffectSketch}
   alt="Sketch map of acousto-electric effect"
 />
-<figcaption>Sketch map of acousto-electric effect [[source](https://www.researchgate.net/figure/Sketch-map-of-acousto-electric-effect_fig2_313809543)]</figcaption>
+<figcaption className="figcaption">Sketch map of acousto-electric effect [[source](https://www.researchgate.net/figure/Sketch-map-of-acousto-electric-effect_fig2_313809543)]</figcaption>
 
 By applying ultrasound to a region and measuring electrical signals on the scalp, you can isolate signals from that particular region by looking for modulation at the ultrasound frequency — typically > 500 kHz.
 
@@ -108,7 +108,7 @@ We were able to detect the acoustoelectric effect at very low pressures (~10 kPa
   src={lockInAmplifierReadout}
   alt="Magnitude of acoustoelectric effect with varying pressures"
 />
-<figcaption>Magnitude of acoustoelectric effect with varying pressures. Each color is a different location in the acoustic field.</figcaption>
+<figcaption className="figcaption">Magnitude of acoustoelectric effect with varying pressures. Each color is a different location in the acoustic field.</figcaption>
 </figure>
 Data was obtained by looking at the difference frequency (500 kHz minus 135.145 kHz*), <div className="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
 
@@ -117,7 +117,7 @@ Data was obtained by looking at the difference frequency (500 kHz minus 135.145 
   src={lockInPictureResults}
   alt="Lock-in amplifier readout over repeated frequency sweeps"
 />
-<figcaption>Lock-in amplifier readout over repeated frequency sweeps.</figcaption>
+<figcaption className="figcaption">Lock-in amplifier readout over repeated frequency sweeps.</figcaption>
 
 The presence of the peak helps us confirm the AE effect and reject spurious environmental signal. The peak only appeared when both the ultrasound and electric field were on, and disappeared when the stimulating electrodes were moved out of the ultrasound focus.
 
@@ -148,7 +148,7 @@ Our home setup was very... bare-bones. We had no Faraday cage, no filtering, no 
   src={sr865aLockInAmplifier}
   alt="SR865A — 4 MHz DSP lock-in amplifier"
 />
-<figcaption className="text-center text-sm">[SR865A — 4 MHz DSP lock-in amplifier](https://www.thinksrs.com/products/sr865a.html)</figcaption>
+<figcaption className="figcaption" className="text-center text-sm">[SR865A — 4 MHz DSP lock-in amplifier](https://www.thinksrs.com/products/sr865a.html)</figcaption>
 
 
 Pictured below are; a hydrophone, 4 copper wires in a 2x2 grid, and electrode pads. The hydrophone connects to an oscilloscope, and allows us to locate the highest pressure region. The four copper wires sticking through the holes are the applied electric field. Only two are powered at once using a signal generator. Having four allows us to pick any two and test different directions and locations. Most often the two closest to the hydrophone were used. The electrode pads pickup the modified electric field (due to the acousto-electric effect).
@@ -156,7 +156,7 @@ Pictured below are; a hydrophone, 4 copper wires in a 2x2 grid, and electrode pa
   src={customProbeCloseup}
   alt="Acousto-electric setup. Custom probe close-up."
 />
-<figcaption className="text-center text-sm">Acousto-electric setup. Custom probe close-up.</figcaption>
+<figcaption className="figcaption" className="text-center text-sm">Acousto-electric setup. Custom probe close-up.</figcaption>
 
 
 The ultrasound single element probe is held in a 3D printed structure which also holds the acoustic lens right above it. In the setup, it is positioned at the bottom of the tank facing upwards. This is so we can have our custom probe free to move around from the surface, to locate the point of highest pressure.
@@ -193,7 +193,7 @@ As a side-note, our setup also allowed us to measure the speed of sound in our s
   src={speedOfSoundMeasurement}
   alt="Speed of sound measurement"
 />
-<figcaption>Purple: transducer driving signal. Yellow: hydrophone pickup signal. Time is along the x-axis.</figcaption>
+<figcaption className="figcaption">Purple: transducer driving signal. Yellow: hydrophone pickup signal. Time is along the x-axis.</figcaption>
 </figure>
 </div>
 </div>
@@ -228,7 +228,7 @@ After none of the simple options worked, we designed our own to be 3D printed, b
       src={lensDesignCrossSection}
       alt="Cross-section of lens design"
     />
-    <figcaption>Cross-section of lens design</figcaption>
+    <figcaption className="figcaption">Cross-section of lens design</figcaption>
 </figure>
 
 <figure>
@@ -237,7 +237,7 @@ After none of the simple options worked, we designed our own to be 3D printed, b
       src={moldingLensesWax}
       alt="Molding lenses out of wax"
     />
-    <figcaption>Molding lenses out of wax</figcaption>
+    <figcaption className="figcaption">Molding lenses out of wax</figcaption>
 </figure>
 </div>
 

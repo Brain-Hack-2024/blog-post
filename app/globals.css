@@ -16,7 +16,8 @@ h2 {
   line-height: 1.4; */
   line-height: 1.6;
 }
-figcaption {
+
+.figcaption {
   font-size: 12px;
   font-style: italic;
   text-align: center;
@@ -96,7 +97,7 @@ h3 {
   /* font-family: 'EB Garamond'; */
 }
 h3 {
-  @apply text-green-500;
+  @apply text-green-700;
   margin-bottom: 1rem;
   @apply mt-24;
 }
@@ -135,17 +136,6 @@ body {
   /* font-family: 'Times New Roman', Times, serif; */
   /* @apply bg-white; */
 }
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.fade-in {
-  animation: fadeIn 1s ease-out;
-}
 
 a {
   border-bottom: 1px dotted rgba(34, 34, 34, 0.69);
@@ -156,6 +146,7 @@ a {
   margin: 20px 0;
   background-color: #f5f5f5;
 }
+
 .interlude {
   /* font-family: 'IBM Plex Mono', monospace; */
   font-family: "Lora", serif;
@@ -167,4 +158,8 @@ a {
 ul {
   list-style: unset;
   margin-left: 20px;
+}
+
+ol {
+  @apply list-decimal ml-6;
 }
