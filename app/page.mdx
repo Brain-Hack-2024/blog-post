@@ -19,7 +19,7 @@ import lockInPictureResults from '/public/ae/lock_in_picture_results.png'
 <div className="max-w-2xl md:ml-[20vw] ml-0 mt-16 md:mt-24 mb-36 px-4 overflow-clip md:overflow-visible">
 {/* # We have 🔬<span className="text-sm">(acoustoelectric)</span> at 🏠<span className="text-sm">(home)</span> */}
 # We have AE at home
-<div class="author">By: Andy Kong, Brian Machado, Ethan Childerhose, Kevin Chung, Marley Xiong</div>
+<div class="author">By: [Ethan Childerhose](https://bigcrete.engineering), Kevin Chung, [Andy Kong](https://andykong.org/projects/yearofoutput/), [Brian Machado](), [Marley Xiong](https://marleyx.com)</div>
 The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution than EEG.
 
 <div className="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
@@ -87,25 +87,28 @@ The governing equation for acoustoelectric fields is:
 
 <img class="w-[250px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/ecf686c6783b6de4a492c0339f978022.png"/>
 
-where $k = 1 \times 10^{-9} \, \text{Pa}^{-1}$. This corresponds to a modulation of 0.1% per MPa of pressure, in the case of an ideal plane wave.
+where $k = 1 \times 10^{-9} \, \text{Pa}^{-1}$. This corresponds to a modulation of 0.1% per MPa of pressure, in the case of a plane wave geometry.
 
 This [Nature](https://www.nature.com/articles/s42005-023-01198-w) paper published last year provided a theoretical foundation for AE. Other people have shown AE in brain phantoms [[1]](https://iopscience.iop.org/article/10.1088/1361-6560/aa6ee7), and imaging of electric currents in the heart [[2]](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8569939/pdf/nihms-1696551.pdf).
 
 
 ### Results
-We were able to detect the acoustoelectric effect at very low pressures (~10 kPa), and confirmed that it was indeed acoustoelectric.
+We were able to produce and measure the acoustoelectric effect in a tank at home. We generated an electric field to simulate a current in the brain and applied ultrasound at 500 kHz to the local current region. 
 
+We worked with continuous-wave ultrasound at very low pressures (~10 kPa). For context, the Nature paper also used continuous-wave ultrasound, and appeared to have SNR < 1 when they used pressures below 250 kPa (figure 4d in their supplementary). By using a lock-in detector, we were able capture acoustoelectric signals down to 250 nV.
+
+The AE effect appears at the frequency of the electric field $ \text{f}_E$ mixed with the frequency of the acoustic field $ \text{f}_A$, giving rise to sum and difference frequencies. We made measurements at the difference frequency, $ \text{f}_{AE} = \text{f}_A - \text{f}_E$.
 
 {/* The AE effect’s governing equation hints at a linear relationship between the applied electric field and the measured AE signal (as well as that for applied pressure). If we were to extrapolate what localized EEG signal amplitudes (20-100µV) would produce in AE signal amplitudes, we get an expected AE signal amplitude of approximately 80 pV per MPa pressure (extrapolated from 1625 nV measured at 50 kPa pressure and 20 Vpp electrical signal, applied to 50 µV localized EEG signal).  */}
-<figure className="md:w-[400px]">
+<figure className="md:w-[450px]">
 <Image
-  className="md:w-[400px] m-auto"
+  className="md:w-[450px] m-auto"
   src={lockInAmplifierReadout}
   alt="Magnitude of acoustoelectric effect with varying pressures"
 />
 <figcaption>Magnitude of acoustoelectric effect with varying pressures. Each color is a different location in the acoustic field.</figcaption>
 </figure>
-Data was obtained by looking at the difference frequency (500 kHz minus 135.145 kHz*), <div className="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> sweeping the lock-in frequency between 499,760 and 499,770 Hz. The amplitude of the AE effect was taken to be the peak within the range:
+Each data point is the magnitude of AE at the difference frequency (500 kHz minus 135.145 kHz*). We swept the lock-in frequency in a 10 Hz range around $\text{f}_{AE}$, between 499,760 and 499,770 Hz. <div className="annotation">* We chose this frequency arbitrarily, but also tested lower frequencies (200 Hz) later.</div> The AE signal is the size of the peak against the background noise of the surrounding frequencies.
 
 <Image
   className="w-[350px] m-auto"
@@ -114,7 +117,7 @@ Data was obtained by looking at the difference frequency (500 kHz minus 135.145 
 />
 <figcaption>Lock-in amplifier readout over repeated frequency sweeps.</figcaption>
 
-The presence of the peak helps us confirm the AE effect and reject spurious environmental signal. The peak only appeared when both the ultrasound and electric field were on, and disappeared when the stimulating electrodes were moved out of the ultrasound focus.
+The presence of the peak helps us confirm the AE effect and reject spurious environmental signal. The peak appears if and only if both the ultrasound and electric field were on, and disappeared when the stimulating electrodes were moved out of the ultrasound focus.
 
 We measured 120 mV at the frequency of the driving electric field, and 1625 nV at the difference frequency—the AE signal. This corresponds to a modulation percentage of 0.00135% at 50 kPa, or 0.027% per MPa.
 
@@ -163,9 +166,15 @@ The ultrasound single element probe is held in a 3D printed structure which also
 
 
 
-#### Phantom
-We used a water tank to model the brain. Water is a good acoustic model of the brain (1524 m/s in water, 1540 m/s in soft tissue), and 0.3% saline is a good conductivity model of the brain.
+#### Water tank
+We used a water tank to model the brain. We got a plastic container from Target and filled it with degassed, deionized water. Water is a good acoustic model of the brain (1524 m/s in water, 1540 m/s in soft tissue), and 0.3% saline is a good conductivity model of the brain.
 
+<div class="note">
+<div class="interlude">Degassing water</div>
+It's important to remove dissolved gases to reduce the risk of cavitation damage of the hydrophone. We used this [vacuum chamber](https://www.amazon.com/VIVOHOME-Gallon-Chamber-Stainless-Degassing/dp/B091GQPVP9/ref=sr_1_1_sspa?crid=37CXVW4WQBP4U&dib=eyJ2IjoiMSJ9.0TqG7EtIA8T4_3XUqfTm7bmeDU0JPeYheYwlWZB45qqcKhXcWfxHYP9P8JupqiAYbuNs9I4CfFSSRHZEY_rllLRVGubXTM_efEjQCZ0H8P5wA2jdchdBQSHJTX5W2sPkvuU-Mxfl-DifOjJOhPeHsOdRbIfNluNjaEO0FC3Kbce2e35rMCBnuG9mmdjVty_Zzc5VZMM_Sam4rWKf-C3PJVmkaWqRyyb3vpbSsXhLVAU.H2kZ2KfpT-7G_T_DgmEOeOAwueDWGJ8Q3Il_R7EoQI4&dib_tag=se&keywords=vacuum+chamber&qid=1728660189&sprefix=vacuum+chambe%2Caps%2C113&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1) from Amazon and let the water sit under vacuum for 2 hours. 
+
+More often than not we were too impatient to use the vacuum chamber, so we used the indie method of degassing: boiling the water.
+</div>
 #### Acoustic field
 We used a 500 kHz transducer (50 mm diameter, unfocused; Olympus A301s-SU). The ultrasound was driven straight from an arbitrary function generator (Siglent SDG1032X).
 
@@ -183,6 +192,7 @@ We used an 0.5 mm needle hydrophone (Onda HNR 0500) to measure the incident pres
 <div className="note">
 <div className="interlude">Interlude: speed of sound</div>
 As a side-note, our setup also allowed us to measure the speed of sound in our saltwater medium. By recording from both the transducer’s driving signal generator and the hydrophone simultaneously, you can see the time delay between the start of the transducer sending out its acoustic waves and the hydrophone receiving this signal. By measuring the distance between the hydrophone and the transducer, and dividing this distance by the time delay, we can determine the speed of sound.
+
 <figure className="m-auto w-[300px] py-5">
 <Image
   className="m-auto"
