@@ -28,7 +28,7 @@ The acoustoelectric effect (AE) allows us to precisely target tiny areas—as sm
 
 <div className="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
 
-Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span className="threecm">3cm</span> spatial regions, due to the smearing of potentials*.<div className="annotation"></div>
+Currently, noninvasive devices are extremely limited in their spatial resolution. EEG can localize brain activity to about <span className="threecm">3cm</span> spatial regions, due to the smearing of potentials*.<div className="annotation">* The power in each spatial frequency decreases exponentially with the order of the frequency, and the varying conductivity of layers of the head (skull, scalp, brain) blurs the potentials. See textbook Electric Fields in the Brain for a mathematical description</div>
 
 What if we could do a lot better, say, <span className="onemm">1</span><span className="onemmmm">mm</span> resolution?
 
@@ -77,11 +77,12 @@ The acoustoelectric effect is a phenomenon where ultrasound interacts with elect
 
 By applying ultrasound to a region and measuring electrical signals on the scalp, you can isolate signals from that particular region by looking for modulation at the ultrasound frequency — typically > 500 kHz.
 
-<Image
+{/* <Image
   className="w-[350px] m-auto"
   src={acoustoElectricEffectMagnitude}
   alt="Acousto-electric effect magnitude"
-/>
+/> */}
+<img className="w-[350px] m-auto" src="https://io0-questions.s3.us-west-2.amazonaws.com/2024/26a2244ac130a9e088c31f35379833f2.png"/>
 
 Ultrasound can be focused down to a 1-mm focal point in the brain. By detecting the acoustoelectrically generated signals, we can in principle obtain the mm-level spatial resolution with the temporal resolution of EEG.
 
