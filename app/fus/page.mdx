@@ -63,7 +63,7 @@ Two main results:
 
 2. We can de-abberrate the signal after it interfaces with the skull. Code and algorithm shared!
 
-<Image src={bannerImg} />
+<Image src={bannerImg} alt="Banner image showing functional ultrasound through the skull" />
 {/* Todo add figure maybe */}
 
 ### What is functional ultrasound?
@@ -73,7 +73,7 @@ Before anything else, a quick primer on functional ultrasound. Functional ultras
 Functional ultrasound measures blood volume by sending short pulses of ultrasound into the brain. Because blood cells have a different acoustic impedance than the background, the blood cells scatter the sound waves. Ultrasound transducers then read the scattered sound waves and form an image of the scattering.
 
 <Figure>
-<Image src={fusPicImg} />
+<Image src={fusPicImg} alt="Diagram illustrating functional ultrasound imaging process" />
 </Figure>
 
 
@@ -86,7 +86,7 @@ You might then think to use as low frequency as you can. But there's a problem w
 So what's the optimal frequency? We modeled the ultrasound attenuation through the skull and the Rayleigh scattering from the blood and asked what frequency gives the most signal back.
 
 <Figure caption="Ultrasound signal drop through bone for blood cells. This combines both reduced Rayleigh scattering and bone attenuation effects. This uses an attenuation of 10 dB/cm/MHz through 0.7 cm of skull each way. The attenuation is given relative to 5 MHz functional ultrasound without the skull, which is the lowest frequency we’ve seen people do functional ultrasound ([jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/frequency-selection/main.ipynb))">
-  <Image src={attenuationImg} />
+  <Image src={attenuationImg} alt="Graph showing ultrasound signal drop through bone for blood cells" />
 </Figure>
 
 
@@ -99,7 +99,7 @@ The thing that nobody tells you is that you can buy a real human skull online (s
 
 
 <Figure>
-<Image src={skullImg}/>
+<Image src={skullImg} alt="Photo of a human skull used for CT scanning"/>
 </Figure>
 
 
@@ -122,7 +122,7 @@ Aberrations in the body come from changes in the speed of sound, similar to how 
 
 
 <Figure caption="Different parts of bone (source: [Anatomy and Physiology](https://openstax.org/books/anatomy-and-physiology/pages/6-3-bone-structure))" centered>
-<Image src={skullRegionsImg}/>
+<Image src={skullRegionsImg} alt="Diagram showing different parts of bone structure"/>
 </Figure>
 
 The problem is that traditional ultrasound imaging assumes that the medium's speed of sound is the same everywhere.
@@ -137,7 +137,7 @@ The engine of our algorithm is a wave propagation simulator. It takes in a speed
 We use a CT scan of the skull to estimate the skull’s speed of sound map. Then, our algorithm considers virtual sensors below the skull.
 
 <Figure>
-<Image src={virtualSensorsImg} />
+<Image src={virtualSensorsImg} alt="Diagram illustrating virtual sensors below the skull" />
 </Figure>
 
 We use the wave solver to find a transformation between the data recorded at the actual sensors that are above the skull and the data that would have been recorded if they were at the virtual positions below the skull. Then, we use this transformation to act as if the sensors were below the skull, and apply standard delay-and-sum beamforming.
@@ -151,7 +151,7 @@ There's two parts to the transformation: on transmit and on receive.
 On transmit, we simulate the virtual sensors sending a plane wave, and we measure the signal at the real sensors. Then, in real life, we get the sensors to send a time-reversed version of what they measured in simulation. This should produce a plane wave at the virtual sensor location.
 
 <Figure>
-<Image src={planeWaveImg}/>
+<Image src={planeWaveImg} alt="Diagram showing plane wave propagation through the skull"/>
 </Figure>
 
 On receive, we take the data measured by our real transducers in reality, and propagate the time-reversed version through the wave simulator, while recording at the virtual sensors. We use the virtual sensor data for the subsequent beamforming.
@@ -160,7 +160,7 @@ On receive, we take the data measured by our real transducers in reality, and pr
 We tested our algorithm in a 2D simulation, with a cross-section of our CT-scanned skull. We placed a small scatterer below the skull, and the goal was to reconstruct it.
 
 <Figure fullWidth>
-<Image src={aberrationCorrectionImg} />
+<Image src={aberrationCorrectionImg} alt="Comparison of regular beamforming and de-aberration algorithm results" />
 </Figure>
 
 Regular beamforming completely fails, but our algorithm can correctly capture the location of the spot.
@@ -186,7 +186,7 @@ To estimate how much signal we’d get back, we needed to know how much the skul
 We decided to measure it ourselves. We built a little mechanical jig to hold an ultrasound probe on one side of the skull to transmit and a small hydrophone on the other to receive.
 
 <Figure>
-<Image src={attenuationJigImg} />
+<Image src={attenuationJigImg} alt="Photo of the mechanical jig used for attenuation measurements" />
 </Figure>
 
 <ExpandableSection title="More technical details">
@@ -257,15 +257,19 @@ The stepper motor was controlled by a TB6600 controller, and step signals were s
 
 <Figure>
 <div className="flex flex-row gap-4">
-  <Image src={phantomImg} />
-  <Image src={pumpImg} />
+  <div className="w-1/2">
+    <Image src={phantomImg} alt="Photo of the tofu phantom used for testing" />
+  </div>
+  <div className="w-1/2">
+    <Image src={pumpImg} alt="Photo of the custom-built syringe pump" />
+  </div>
 </div>
 </Figure>
 
 
 ### Acknowledgements
 
-Thank you to:
-- [Hunter Davis](https://twitter.com/huntercoledavis), [David Garrett](https://twitter.com/david_c_garrett), [Sumner Norman](https://twitter.com/SumnerLN), Jean Provost for technical advice
-- Protocol Labs for sponsoring
-- [Leo Zaroff](https://twitter.com/leozaroff) for lending us his hydrophone.
+A big thank you to:
+- Protocol Labs for sponsoring the hacksprint
+- [Hunter Davis](https://twitter.com/huntercoledavis), [David Garrett](https://twitter.com/david_c_garrett), [Sumner Norman](https://twitter.com/SumnerLN), Jean Provost, and [Hari Kumar](https://twitter.com/Harie1897) for technical advice
+- [Leo Zaroff](https://twitter.com/leozaroff) for lending us his hydrophone
