@@ -2,6 +2,8 @@ import Figure from "../components/Figure"
 import Video from "../components/Video"
 import Image from "next/image"
 import ExpandableSection from "../components/ExpandableSection"
+import Annotation from "../components/Annotation"
+
 
 {/* Images */}
 import attenuationImg from "/public/fus/attenuation.png"
@@ -42,7 +44,7 @@ So far, all fUSI experiments involve opening up the skull or replacing it with a
 
 When we asked around about doing functional ultrasound with the skull intact, we were told it was impossible. There are two big challenges in it ultrasound work through the skull:
 
-1. High frequency ultrasound waves get distorted when they pass through the skull. If you use traditional ultrasound beamforming and don’t account for this distortion, you’re bound to fail.
+1. High frequency ultrasound waves get distorted when they pass through the skull. If you use traditional ultrasound beamforming and don't account for this distortion, you're bound to fail.
 
 <Figure caption="A 1 MHz ultrasound wave propagating through a skull model, obtained via CT. A 2D solver with no absorption was used for simplicity. ([jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/skull-propagation/skull_propagation.ipynb))">
 <Video src="fus/pressure_animation_1.0MHz.mp4" />
@@ -85,12 +87,12 @@ You might then think to use as low frequency as you can. But there's a problem w
 
 So what's the optimal frequency? We modeled the ultrasound attenuation through the skull and the Rayleigh scattering from the blood and asked what frequency gives the most signal back.
 
-<Figure caption="Ultrasound signal drop through bone for blood cells. This combines both reduced Rayleigh scattering and bone attenuation effects. This uses an attenuation of 10 dB/cm/MHz through 0.7 cm of skull each way. The attenuation is given relative to 5 MHz functional ultrasound without the skull, which is the lowest frequency we’ve seen people do functional ultrasound ([jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/frequency-selection/main.ipynb))">
+<Figure caption="Ultrasound signal drop through bone for blood cells. This combines both reduced Rayleigh scattering and bone attenuation effects. This uses an attenuation of 10 dB/cm/MHz through 0.7 cm of skull each way. The attenuation is given relative to 5 MHz functional ultrasound without the skull, which is the lowest frequency we've seen people do functional ultrasound ([jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/frequency-selection/main.ipynb))">
   <Image src={attenuationImg} alt="Graph showing ultrasound signal drop through bone for blood cells" />
 </Figure>
 
 
-It turns out that 1.25 MHz gives the least signal drop for an attenuation of 10 dB/cm/MHz. So we use 1-2 MHz as a first guess.
+It turns out that 1.25 MHz gives the least signal drop for an attenuation of 10 dB/cm/MHz. So we use 1-2 MHz as a first guess.<Annotation>The signal drop isn't the only metric that matters. Another relevant metric is contrast: higher frequencies will give higher contrast between the Rayleigh scattering blood cells and the background.</Annotation>
 
 
 ### Skull CT Scan
@@ -103,7 +105,7 @@ The thing that nobody tells you is that you can buy a real human skull online (s
 </Figure>
 
 
-Here’s what the CT scan looks like. We thought this was really cool! You can access the scan [here](https://drive.google.com/file/d/1_DwyJauas5qvFQ3T0cpL_5P-mgHvKkRE/view?usp=sharing).
+Here's what the CT scan looks like. We thought this was really cool! You can access the scan [here](https://drive.google.com/file/d/1_DwyJauas5qvFQ3T0cpL_5P-mgHvKkRE/view?usp=sharing).
 
 <Figure>
 <Video src="fus/ct.mp4"/>
@@ -114,7 +116,7 @@ Here’s what the CT scan looks like. We thought this was really cool! You can a
 
 To correct for the distortion of ultrasound through the skull, we developed our own skull de-aberration algorithm.
 
-Aberrations in the body come from changes in the speed of sound, similar to how light bends in Snell's law. There are two problems here
+Aberrations in the body come from changes in the speed of sound<Annotation>Changes in density and even the stiffness of the material can also affect wave propagation, but those are less pronounced than changes in speed of sound in tissue.</Annotation>, similar to how light bends in Snell's law. There are two problems here
 
 1. Bone has a much higher speed of sound (\~2800 m/s) than the brain (\~1540 m/s)
 
@@ -134,7 +136,7 @@ The engine of our algorithm is a wave propagation simulator. It takes in a speed
 </Figure>
 
 
-We use a CT scan of the skull to estimate the skull’s speed of sound map. Then, our algorithm considers virtual sensors below the skull.
+We use a CT scan of the skull to estimate the skull's speed of sound map. Then, our algorithm considers virtual sensors below the skull.<Annotation>To go from the CT scan to a speed of sound map, we binarize the CT skull into tissue/marrow and bone. We set bone voxels to 2,800 m/s and the rest to 1,540 m/s.</Annotation>
 
 <Figure>
 <Image src={virtualSensorsImg} alt="Diagram illustrating virtual sensors below the skull" />
@@ -167,21 +169,21 @@ Regular beamforming completely fails, but our algorithm can correctly capture th
 
 We also started to test our approach on real data. We have some preliminary results that show that we can de-abberate through a 3d printed squiggly material (meant to emulate the skull), but we need to do some more testing.
 
-In translating this approach to humans, we won’t have access to a CT scan. But, perhaps an MRI would suffice. Or, maybe you could use machine learning to bypass de-aberration altogether.
+In translating this approach to humans, we won't have access to a CT scan. But, perhaps an MRI would suffice. Or, maybe you could use machine learning to bypass de-aberration altogether.
 
 
 ### Attenuation measurements
 
-Now that we have a potential way to de-aberrate through the skull, we wanted to know if there would even be enough signal after the ultrasound passes through the skull and back. Ultrasound transducers have noise that’s about $1 \text{ mPa}/\sqrt{\text{Hz}}$, which is \~1 Pa for a \~1 MHz bandwidth ([ref](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7407969/)). So we need to make sure the signal we receive is above that.
+Now that we have a potential way to de-aberrate through the skull, we wanted to know if there would even be enough signal after the ultrasound passes through the skull and back. Ultrasound transducers have noise that's about $1 \text{ mPa}/\sqrt{\text{Hz}}$, which is \~1 Pa for a \~1 MHz bandwidth ([ref](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7407969/)). So we need to make sure the signal we receive is above that.
 
 
 <ExpandableSection  title="Why not just shoot more ultrasound?">
 
-Unfortunately, there’s a safety limit. Since the head absorbs ultrasound, it heats up a little bit. The safety limit imposed by the International Electrotechnical Commission (IEC) is 2ºC, so we need to make sure not to surpass that.
+Unfortunately, there's a safety limit. Since the head absorbs ultrasound, it heats up a little bit. The safety limit imposed by the International Electrotechnical Commission (IEC) is 2ºC, so we need to make sure not to surpass that.
 
 </ExpandableSection>
 
-To estimate how much signal we’d get back, we needed to know how much the skull attenuates ultrasound. You’d think the literature would have an answer to this, but different sources report widely different answers, from [8.3 dB/cm/MHz](https://pubmed.ncbi.nlm.nih.gov/16829322/) to [22 dB/cm/MHz](https://www.cambridge.org/core/books/diagnostic-ultrasound/E49EEE09C4081D1EFE1DC457C7D7973C). For some reason, 22 dB/cm/MHz is the number people will tell you in conversation.
+To estimate how much signal we'd get back, we needed to know how much the skull attenuates ultrasound. You'd think the literature would have an answer to this, but different sources report widely different answers, from [8.3 dB/cm/MHz](https://pubmed.ncbi.nlm.nih.gov/16829322/) to [22 dB/cm/MHz](https://www.cambridge.org/core/books/diagnostic-ultrasound/E49EEE09C4081D1EFE1DC457C7D7973C). For some reason, 22 dB/cm/MHz is the number people will tell you in conversation.
 
 We decided to measure it ourselves. We built a little mechanical jig to hold an ultrasound probe on one side of the skull to transmit and a small hydrophone on the other to receive.
 
@@ -219,11 +221,11 @@ Since we only had time to measure two jig locations (+ we sketchily removed a no
 
 Firstly, there is no mention in the paper of degassing the skull. Without degassing, there could be many air bubbles formed in the pores, which will scatter ultrasound heavily (since there is a huge mechanical impedance mismatch between air and water).
 
-Secondly, they use focused transmission, instead of sending plane waves. The skull will spread out the focus, so if you don’t sample enough, you’ll mistake spreading for attenuation.
+Secondly, they use focused transmission, instead of sending plane waves. The skull will spread out the focus, so if you don't sample enough, you'll mistake spreading for attenuation.
 
 The only good reference we could find for attenuation across frequencies was a 2006 paper by White. They degas the skull and use plane waves. They claim to measure 8.53 dB/cm/MHz, but when we tried [reproducing their analysis](https://docs.google.com/spreadsheets/d/1A63-Qzqo9rgjiS1kin3i3dF24EzdTXvK-ylPrlOjii8/edit?gid=0#gid=0) using their data, we got 11.9 dB/cm/MHz. This is very close to what we measured!
 
-An important point is that we measured attenuation, which is different from absorption. Attenuation also includes things like scattering and reflections. But it’s absorption that really limits us, not attenuation, since absorption is what contributes to heating in the head. Our attenuation measurements serve as an upper bound on absorption.
+An important point is that we measured attenuation, which is different from absorption. Attenuation also includes things like scattering and reflections. But it's absorption that really limits us, not attenuation, since absorption is what contributes to heating in the head. Our attenuation measurements serve as an upper bound on absorption.
 
 It could be that the absorption is a lot lower than the attenuation. [Pinton et al](https://pubmed.ncbi.nlm.nih.gov/22225300/) find that with a 1 MHz pulsed source, only 2.7 dB/cm of the measured 13.3 dB/cm was due to absorption.
 
@@ -232,9 +234,9 @@ It could be that the absorption is a lot lower than the attenuation. [Pinton et 
 
 So back to the key question: does fUSI  through the skull get a high enough signal-to-noise ratio (SNR)?
 
-If we use 11 dB/cm/MHz as the attenuation value, we’d expect a signal drop of about 40 dB, or equivalently, 100x in pressure, relative to below-skull functional ultrasound (see the earlier plot) If we use 2.7 dB/cm/MHz, we get a signal drop of 22 dB, or 10x in pressure.
+If we use 11 dB/cm/MHz as the attenuation value, we'd expect a signal drop of about 40 dB, or equivalently, 100x in pressure, relative to below-skull functional ultrasound (see the earlier plot) If we use 2.7 dB/cm/MHz, we get a signal drop of 22 dB, or 10x in pressure.
 
-Is that too low? We’re not sure yet. It depends on the pressure changes that are typically seen in regular functional ultrasound. Unfortunately, we couldn’t find that in the literature (if you know this number, please let us know). If the changes in regular functional ultrasound are 100 Pa, then we’d expect to see changes of about 1-10 Pa in functional ultrasound through the skull. This is 1-10 times larger than the noise floor of a transducer (\~1 Pa). And we can use a functional ultrasound trick, called [coherent compounding](https://pubmed.ncbi.nlm.nih.gov/19411209/), to increase the SNR further. Note, this is the SNR in the sensor domain, but what we really care about is the SNR in the image domain.
+Is that too low? We're not sure yet. It depends on the pressure changes that are typically seen in regular functional ultrasound. Unfortunately, we couldn't find that in the literature (if you know this number, please let us know). If the changes in regular functional ultrasound are 100 Pa, then we'd expect to see changes of about 1-10 Pa in functional ultrasound through the skull. This is 1-10 times larger than the noise floor of a transducer (\~1 Pa). And we can use a functional ultrasound trick, called [coherent compounding](https://pubmed.ncbi.nlm.nih.gov/19411209/), to increase the SNR further. Note, this is the SNR in the sensor domain, but what we really care about is the SNR in the image domain.
 
 
 ### Doppler testbed
@@ -246,7 +248,7 @@ Because functional ultrasound works by detecting the movement of blood cells in 
 
 #### Syringe Pump
 
-We built our own syringe pump. Blood travels at around [\~10 mm/s](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6610068/) in small vessels in the brain, so we wanted our pump to have similar speeds. Initially we planned on using a peristaltic pump, however we could not source one that had a small enough volumetric flow rate, and at slow speeds peristaltic pumps flow rate is not consistent. 
+We built our own syringe pump. Blood travels at around [\~10 mm/s](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6610068/) in small vessels in the brain, so we wanted our pump to have similar speeds. Initially we planned on using a peristaltic pump, however we could not source one that had a small enough volumetric flow rate, and at slow speeds peristaltic pumps flow rate is not consistent.
 
 <ExpandableSection title="Technical details">
 
