@@ -29,7 +29,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <nav className="border-b-[1px] border-[#eee] md:hidden">
+        <nav className="border-b-[1px] border-[#eee] lg:hidden">
           <div className="max-w-2xl mx-auto flex justify-center text-[12px]">
             <Link
               href="/ae"
@@ -49,7 +49,30 @@ export default function RootLayout({
             </Link>
           </div>
         </nav>
-        <div className="max-w-2xl mx-auto lg:ml-[20vw] mt-16 lg:mt-24 mb-36 px-4 overflow-clip lg:overflow-visible">
+        <div className="max-w-2xl mx-auto mt-16 lg:mt-24 mb-36 px-4 overflow-clip lg:overflow-visible relative">
+          <div className="hidden antialiased lg:visible absolute lg:flex left-[-220px] top-[10px] h-full w-[200px] flex-col text-[#666] justify-start">
+            <Link href="/ae" className={`w-full py-2 border-b-0`}>
+              <span
+                className={`mr-2 text-[18px] ${
+                  pathname === "/ae" ? "text-black" : "text-transparent"
+                }`}
+              >
+                •
+              </span>
+              acoustoelectric
+            </Link>
+            <Link href="/fus" className={`w-full py-2 border-b-0`}>
+              <span
+                className={`mr-2 text-[18px] ${
+                  pathname === "/fus" ? "text-black" : "text-transparent"
+                }`}
+              >
+                •
+              </span>
+              functional ultrasound
+            </Link>
+          </div>
+
           {children}
         </div>
       </body>
