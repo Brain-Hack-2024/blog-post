@@ -16,6 +16,7 @@ import attenuationMeasurementsImg from "/public/fus/attenuation_measurements.png
 import phantomImg from "/public/fus/phantom.png"
 import pumpImg from "/public/fus/pump.png"
 import bannerImg from "/public/fus/banner.png"
+import bannerMobileImg from "/public/fus/banner-mobile.png"
 import fusPicImg from "/public/fus/fus_pic.png"
 import planeWaveImg from "/public/fus/plane_wave.png"
 
@@ -65,8 +66,12 @@ Two main results:
 
 2. We can de-abberrate the signal after it interfaces with the skull. Code and algorithm shared!
 
-<div className="w-full lg:w-screen lg:-ml-[calc(50vw-50%)] flex justify-center">
+<div className="w-full sm:w-screen sm:-ml-[calc(50vw-50%)] flex justify-center hidden sm:flex">
   <Image src={bannerImg} alt="Banner image showing functional ultrasound through the skull" className="w-full max-w-6xl" />
+</div>
+
+<div className="w-full flex justify-center sm:hidden -px-8">
+  <Image src={bannerMobileImg} alt="Banner image showing functional ultrasound through the skull" className="w-full" />
 </div>
 
 ### What is functional ultrasound?
