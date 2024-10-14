@@ -13,10 +13,10 @@ export default function Figure({
   fullWidth?: boolean;
 }) {
   return (
-    <figure className={`mx-auto ${fullWidth ? "w-full" : " max-w-sm"}`}>
+    <figure className={`mx-auto ${fullWidth ? "w-full" : "max-w-sm"}`}>
       {children}
       {caption && (
-      <figcaption className={`text-xs text-gray-500 -mx-10 ${centered ? "text-center" : ""}`}>
+      <figcaption className={`text-xs text-gray-500 lg:-mx-10 ${centered ? "text-center" : ""}`}>
         <ReactMarkdown>{caption}</ReactMarkdown>
       </figcaption>
       )}
