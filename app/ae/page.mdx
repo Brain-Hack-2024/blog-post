@@ -22,9 +22,9 @@ import lockInAmplifierSetup from '/public/ae/lock_in_amplifier_setup.png'
 import lockInPictureResults from '/public/ae/lock_in_picture_results.png'
 
 {/* # We have 🔬<span className="text-sm">(acoustoelectric)</span> at 🏠<span className="text-sm">(home)</span> */}
-# We have AE at home
-<div class="author">By: [Ethan Childerhose](https://bigcrete.engineering), Kevin Chung, [Andy Kong](https://andykong.org/projects/yearofoutput/), [Brian Machado](), [Marley Xiong](https://marleyx.com)</div>
-The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x higher resolution than EEG.
+<div className="text-[28px] py-5">We have AE at home</div>
+<div class="author">By: [Ethan Childerhose](https://bigcrete.engineering), Kevin Chung, [Andy Kong](https://andykong.org/projects/yearofoutput/), [Brian Machado](https://x.com/), [Marley Xiong](https://marleyx.com)</div>
+The acoustoelectric effect (AE) allows us to precisely target tiny areas—as small as a millimeter—and use ultrasound to single out the electric field of a region. Our goal is to use it to make brain-computer interfaces with 27,000x more channels than EEG.
 
 <div className="custom-quote text-md"> We built a setup at home and replicated the AE effect. Our system is sensitive enough to measure acoustoelectric signals down to 250 nV with SNR > 1, despite no shielding or noise cancellation. </div>
 
@@ -129,7 +129,7 @@ We measured 120 mV at the frequency of the driving electric field, and 1625 nV a
 Brain signals have a magnitude of 10-100 µV within the 0-10 Hz bandwidth at the surface of the scalp, so we expect the AE signal to have a magnitude of 2.7-27 nV per MPa. From the picture of the lock-in amplifier, our noise floor was about 100 nV, so about 1-2 orders of magnitude of noise reduction would be necessary to capture AE signals from the brain.
 
 Is this doable? From an electronics perspective, very low-noise preamplifiers exist with less than $1 \, \text{nV}/\sqrt{\text{Hz}}$ noise*. <div className="annotation">*Samuel Groner, [A low noise laboratory-grade measurement preamplifier
-](https://linearaudio.net/low-noise-laboratory-grade-measurement-preamplifier)</div>The more fundamental bound of our noise floor comes from Johnson noise in the brain itself, which is $4.5 \, \text{nV}/\sqrt{\text{Hz}}$. Assuming a bandwidth of 10 Hz, this gives a noise floor of 14 nV, which would make the AE signal just barely detectable.
+](https://linearaudio.net/low-noise-laboratory-grade-measurement-preamplifier)</div>The more fundamental bound of our noise floor comes from Johnson noise in the brain and skull itself. The skull , which is $5.85 \, \text{nV}/\sqrt{\text{Hz}}$. Assuming a bandwidth of 10 Hz, this gives a noise floor of 18.5 nV, which would make the AE signal just barely detectable.
 
 One idea to lower the noise floor would be to average over many electrodes. The uncorrelated Johnson noise would decrease as $\sqrt{N}$ in the number of electrodes, while the correlated AE signal would increase linearly with N.
 
@@ -182,6 +182,8 @@ More often than not we were too impatient to use the vacuum chamber, so we used 
 </div>
 #### Acoustic field
 We used a 500 kHz transducer (50 mm diameter, unfocused; Olympus A301s-SU). The ultrasound was driven straight from an arbitrary function generator (Siglent SDG1032X).
+
+We encased the transducer in a latex balloon full of mineral oil to isolate the transducer from the system electrically.
 
 #### Electric field
 The electric field was applied with a pair of copper wires, stripped bare for 5 mm at the ends, with 4.5 mm (1.5 wavelengths) inter-electrode spacing.
@@ -265,7 +267,7 @@ The resin printed lenses were the best. The wax casted ones were difficult to ma
 />
 Analog signals are riddled with noise—namely, thermal noise, line noise, and 1/f noise. We expect the acoustoelectric signal to be very small (on the order of nanovolts to microvolts), so naive, direct measurements will result in our signal being drowned out by noise.
 
-By using the acoustoelectric effect, we've shifted our signal to 500 kHz, away from most sources of noise. We can use filters to get rid of noise contributions outside of this band. We expect the noise to be mostly thermal (white noise) in the bandwidth of interest.
+By using the acoustoelectric effect, we've shifted our signal to 500 kHz, away from most sources of noise. We can use filters to get rid of noise contributions outside of this band. Within the bandwidth of interest, we expect the noise to be mostly thermal (white noise).
 
 Lock-in amplifiers are extreme examples of frequency-selective filters. Say our signal of interest occurs around a particular frequency f with some bandwidth b, but that this signal is polluted by lots of noise from various regions of the frequency spectrum. Our AE signal is such a signal, occurring only around the ultrasound frequency with bandwidth determined by EEG signal bandwidth. If we multiply this signal with another sinusoidal signal with frequency f through the use of an analog mixer, then we are able to produce a modulated signal. In this modulated signal, a large principal component of the signal would be in the original frequency band around f, but two side bands would also occur: one at the difference of the two input frequencies, and another at the sum (recall trig identities of multiplying two sinusoids!), which in this case are around 0 and 2f. By using a low-pass filter on this modulated output, we can strictly select for the component of the modulated signal around 0Hz.
 
@@ -273,7 +275,7 @@ In total, what the above operation achieves is a very tight band-pass filter tha
 
 {/* </div> */}
 </div>
-<div className="column pb-36">
-### Conclusion
-End scene.
+### Acknowledgements
+Thank you to Hunter for helping us debug, Leo for the hydrophone, and Keith for the transducer. 
+<div className="column pb-48">
 </div>
