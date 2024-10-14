@@ -46,7 +46,8 @@ h1 {
   /* use EB Garramond */
   /* font-family: "EB Garamond", serif; */
   /* font-family: "Roboto", sans-serif; */
-  @apply text-2xl font-semibold;
+  @apply text-3xl lg:pt-5 pb-5;
+  
 }
 .annotation-container {
   position: relative;
