@@ -47,7 +47,7 @@ When we asked around about doing functional ultrasound with the skull intact, we
 
 1. High frequency ultrasound waves get distorted when they pass through the skull. If you use traditional ultrasound beamforming and don't account for this distortion, you're bound to fail.
 
-<Figure caption="A 1 MHz ultrasound wave propagating through a skull model, obtained via CT. A 2D solver with no absorption was used for simplicity. ([jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/skull-propagation/skull_propagation.ipynb))">
+<Figure caption="A 1 MHz ultrasound wave propagating through a skull model, obtained via CT. A 2D solver with no absorption was used for simplicity. ([Jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/skull-propagation/skull_propagation.ipynb))">
 <Video src="fus/pressure_animation_1.0MHz.mp4" />
 </Figure>
 
@@ -93,7 +93,7 @@ You might then think to use as low frequency as you can. But there's a problem w
 
 So what's the optimal frequency? We modeled the ultrasound attenuation through the skull and the Rayleigh scattering from the blood and asked what frequency gives the most signal back.
 
-<Figure caption="Ultrasound signal drop through bone for blood cells. This combines both reduced Rayleigh scattering and bone attenuation effects. This uses an attenuation of 10 dB/cm/MHz through 0.7 cm of skull each way. The attenuation is given relative to 5 MHz functional ultrasound without the skull, which is the lowest frequency we've seen people do functional ultrasound ([jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/frequency-selection/main.ipynb))">
+<Figure caption="Ultrasound signal drop through bone for blood cells. This combines both reduced Rayleigh scattering and bone attenuation effects. This uses an attenuation of 10 dB/cm/MHz through 0.7 cm of skull each way. The attenuation is given relative to 5 MHz functional ultrasound without the skull, which is the lowest frequency we've seen people do functional ultrasound ([Jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/frequency-selection/main.ipynb))">
   <Image src={attenuationImg} alt="Graph showing ultrasound signal drop through bone for blood cells" />
 </Figure>
 
@@ -171,7 +171,7 @@ We tested our algorithm in a 2D simulation, with a cross-section of our CT-scann
 <Image src={aberrationCorrectionImg} alt="Comparison of regular beamforming and de-aberration algorithm results" />
 </Figure>
 
-Regular beamforming completely fails, but our algorithm can correctly capture the location of the spot.
+Regular beamforming completely fails, but our algorithm can correctly capture the location of the spot.<Annotation>After the hack, we found out about an [existing approach](https://ieeexplore.ieee.org/abstract/document/10307026) to skull de-abberation, but it doesn't seem to work as well as our method ([see section 2c of our Jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/notebooks/recon_skull.ipynb)).</Annotation>
 
 We also started to test our approach on real data. We have some preliminary results that show that we can de-abberate through a 3d printed squiggly material (meant to emulate the skull), but we need to do some more testing.
 
@@ -217,7 +217,7 @@ The attenuation we measured was 11.18 dB/cm/MHz, which was on the lower side of 
 
 <ExpandableSection title=" How did we compute attenuation?">
 
-First, the data was preprocessed by bandpass filtering the data around the reference frequency. Then, for each jig location, we computed the total power as the squared measurements summed over all 9 locations. Then we divided the total power at each jig location by the total power with no skull. We measured the thickness of the skull at each jig location with a digital caliper. See this [jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/skull-attenuation-analysis/main.ipynb) for our data analysis.
+First, the data was preprocessed by bandpass filtering the data around the reference frequency. Then, for each jig location, we computed the total power as the squared measurements summed over all 9 locations. Then we divided the total power at each jig location by the total power with no skull. We measured the thickness of the skull at each jig location with a digital caliper. See this [Jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/skull-attenuation-analysis/main.ipynb) for our data analysis.
 
 </ExpandableSection>
 
