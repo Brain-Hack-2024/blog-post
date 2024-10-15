@@ -148,7 +148,7 @@ We use a CT scan of the skull to estimate the skull's speed of sound map. Then, 
 <Image src={virtualSensorsImg} alt="Diagram illustrating virtual sensors below the skull" />
 </Figure>
 
-We use the wave solver to find a transformation between the data recorded at the actual sensors that are above the skull and the data that would have been recorded if they were at the virtual positions below the skull. Then, we use this transformation to act as if the sensors were below the skull, and apply standard delay-and-sum beamforming. The code for reproducing our results can be found in [`recon_skull.ipynb`](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/notebooks/recon_skull.ipynb) in our Github repository.
+We use the wave solver to find a transformation between the data recorded at the actual sensors that are above the skull and the data that would have been recorded if they were at the virtual positions below the skull. Then, we use this transformation to act as if the sensors were below the skull, and apply standard delay-and-sum beamforming. The code for reproducing our results can be found in [`recon_skull.ipynb`](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/notebooks/recon_skull.ipynb) in our GitHub repository.
 
 <ExpandableSection title="How do we find the transformation?">
 
