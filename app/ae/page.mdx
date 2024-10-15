@@ -129,7 +129,7 @@ We measured 120 mV at the frequency of the driving electric field, and 1625 nV a
 Brain signals have a magnitude of 10-100 µV within the 0-10 Hz bandwidth at the surface of the scalp, so we expect the AE signal to have a magnitude of 2.7-27 nV per MPa. From the picture of the lock-in amplifier, our noise floor was about 100 nV, so about 1-2 orders of magnitude of noise reduction would be necessary to capture AE signals from the brain.
 
 Is this doable? From an electronics perspective, very low-noise preamplifiers exist with less than $1 \, \text{nV}/\sqrt{\text{Hz}}$ noise*. <div className="annotation">*Samuel Groner, [A low noise laboratory-grade measurement preamplifier
-](https://linearaudio.net/low-noise-laboratory-grade-measurement-preamplifier)</div>The more fundamental bound of our noise floor comes from Johnson noise in the brain and skull itself. The skull , which is $5.85 \, \text{nV}/\sqrt{\text{Hz}}$. Assuming a bandwidth of 10 Hz, this gives a noise floor of 18.5 nV, which would make the AE signal just barely detectable.
+](https://linearaudio.net/low-noise-laboratory-grade-measurement-preamplifier)</div>The more fundamental bound of our noise floor comes from Johnson noise in the brain and skull itself. The skull has a resistivity of about [$1000 \, \Omega \cdot \text{cm}$](https://www.sciencedirect.com/science/article/abs/pii/S138824570400327X), which translates to a Johnson noise of about $5 \text{ nV}/\sqrt{\text{Hz}}$. Assuming a bandwidth of 10 Hz, this gives a noise floor of 16 nV, which would make the AE signal just barely detectable.
 
 One idea to lower the noise floor would be to average over many electrodes. The uncorrelated Johnson noise would decrease as $\sqrt{N}$ in the number of electrodes, while the correlated AE signal would increase linearly with N.
 
@@ -283,4 +283,7 @@ A big thank you to:
 - [Hunter Davis](https://twitter.com/huntercoledavis), [David Garrett](https://twitter.com/david_c_garrett), and Jean Provost for technical advice
 - [Leo Zaroff](https://twitter.com/leozaroff) for lending us his hydrophone and for advice
 - Keith Murphy and [Attune Neurosciences](https://www.attuneneuro.com/) for lending us their transducer
+### CAD Models
+You can find our CAD models in our [GitHub repository](https://github.com/Brain-Hack-2024/acousto-electric/).
 </div>
+
