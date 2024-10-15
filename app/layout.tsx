@@ -49,7 +49,7 @@ export default function RootLayout({
             </Link>
           </div>
         </nav>
-        <div className="max-w-2xl mx-auto mt-8 lg:mt-24 mb-36 px-4 overflow-clip lg:overflow-visible relative">
+        <div className="max-w-2xl mx-auto mt-8 lg:mt-24 mb-36 px-4 overflow-clip lg:overflow-visible relative pb-28">
           <div className="hidden antialiased lg:visible absolute lg:flex left-[-220px] top-[10px] h-full w-[200px] flex-col text-[#666] justify-start">
             <Link href="/ae" className={`w-full py-2 border-b-0`}>
               <span

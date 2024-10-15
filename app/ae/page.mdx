@@ -257,7 +257,6 @@ After none of the simple options worked, we designed our own to be 3D printed, b
 The resin printed lenses were the best. The wax casted ones were difficult to make, and were very dependant on the type of wax used. The FDM printed PLA lenses had some air gaps between the 100% printed infill which causes lots of acoustic reflection.
 
 
-<div className="column">
 #### Lock-in amplifier
 
 <Image
@@ -273,9 +272,6 @@ Lock-in amplifiers are extreme examples of frequency-selective filters. Say our 
 
 In total, what the above operation achieves is a very tight band-pass filter that gets rid of noise from everywhere but around the frequency of our interest. This in turn greatly boosts our SNR and allows us to confidently detect signals down to the low-nanovolt range, around where we expect to see the AE signal. Furthermore, in the specific context of AE, recall how we added the ultrasound frequency f to our EEG signal, only to subtract it again through the use of the lock-in amplifier. We have effectively demodulated our AE signal back into the normal EEG frequency range, but this time with minimal noise (thanks to the lock-in amplifier) AND with spatial specificity (thanks to the AE effect)! Double wow!
 
-{/* </div> */}
-</div>
-<div className="column pb-48">
 
 ### Acknowledgements
 A big thank you to:
@@ -285,5 +281,4 @@ A big thank you to:
 - Keith Murphy and [Attune Neurosciences](https://www.attuneneuro.com/) for lending us their transducer
 ### CAD Models
 You can find our CAD models in our [GitHub repository](https://github.com/Brain-Hack-2024/acousto-electric/).
-</div>
 
