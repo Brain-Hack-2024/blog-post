@@ -50,8 +50,8 @@ export default function RootLayout({
           </div>
         </nav>
         <div className="max-w-2xl mx-auto mt-8 lg:mt-24 mb-36 px-4 overflow-clip lg:overflow-visible relative pb-28">
-          <div className="hidden antialiased lg:visible absolute lg:flex left-[-220px] top-[10px] h-full w-[200px] flex-col text-[#666] justify-start">
-            <Link href="/ae" className={`w-full py-2 border-b-0`}>
+          <div className="hidden antialiased lg:block lg:fixed left-[calc(50%-660px)] top-[100px] h-full w-[200px] flex-col text-[#666] justify-start">
+            <Link href="/ae" className={`w-full py-2 border-b-0 block`}>
               <span
                 className={`mr-2 text-[18px] ${
                   pathname === "/ae" ? "text-black" : "text-transparent"
@@ -63,7 +63,7 @@ export default function RootLayout({
                 acoustoelectric
               </span>
             </Link>
-            <Link href="/fus" className={`w-full py-2 border-b-0`}>
+            <Link href="/fus" className={`w-full py-2 border-b-0 block`}>
               <span
                 className={`mr-2 text-[18px] ${
                   pathname === "/fus" ? "text-black" : "text-transparent"
