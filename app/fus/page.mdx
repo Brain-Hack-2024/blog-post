@@ -89,7 +89,7 @@ Functional ultrasound measures blood volume by sending short pulses of ultrasoun
 
 The first design question for an ultrasound imager is what frequency to use. Higher frequencies attenuate ultrasound more — the typical 10 MHz ultrasound would attenuate the signal to well below the noise levels of ultrasound transducers.
 
-You might then think to use as low frequency as you can. But there's a problem with that, too: as you lower the frequency, the amount of scattering from red blood cells decreases and you get less signal back. The physical reason for this is that the scattering is in the [Rayleigh regime](https://en.wikipedia.org/wiki/Rayleigh_scattering) (the red blood cells are a lot smaller than the wavelength of ultrasound), and the scattering in this regime scales with the fourth power of frequency.
+You might then think to use as low of a frequency as you can. But there's a problem with that, too: as you lower the frequency, the amount of scattering from red blood cells decreases and you get less signal back. The physical reason for this is that the scattering is in the [Rayleigh regime](https://en.wikipedia.org/wiki/Rayleigh_scattering) (the red blood cells are a lot smaller than the wavelength of ultrasound), and the scattering in this regime scales with the fourth power of frequency.
 
 So what's the optimal frequency? We modeled the ultrasound attenuation through the skull and the Rayleigh scattering from the blood and asked what frequency gives the most signal back.
 
