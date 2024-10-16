@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import "./globals.css";
 import { useEffect } from "react";
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -84,6 +85,7 @@ export default function RootLayout({
 
           {children}
         </div>
+        <Analytics />
       </body>
     </html>
   );
