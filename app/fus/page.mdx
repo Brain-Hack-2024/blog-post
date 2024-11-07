@@ -27,6 +27,8 @@ export const metadata = {
   description: "We show new results for making functional ultrasound work through the skull."
 }
 
+export const R2_URL = "https://pub-9ded51b796ab46ffb6c70940cf4b6be4.r2.dev"
+
 # Functional ultrasound through the skull
 <div className="author">
 By: [Raffi Hotter](https://rhotter.com/), [Vincent Huang](https://www.vvhuang.com/), [Brian Machado](https://twitter.com/sincethestudy), Thomas Ribeiro, and [Anson Yu](https://ansonyu.me/)
@@ -37,7 +39,7 @@ By: [Raffi Hotter](https://rhotter.com/), [Vincent Huang](https://www.vvhuang.co
 Could we possibly use it to make a brain-computer interface? Similar to the [acousto-electric effect](/ae), fUSI could have **10,000x** more channels than state-of-the-art EEG.
 
 <Figure caption="Functional ultrasound in a rat brain (from [Macé et al., 2011](https://www.nature.com/articles/nmeth.1641))" centered>
-<Video src="fus/fus.mp4" />
+<Video src={`${R2_URL}/fus.mp4`} />
 </Figure>
 
 
@@ -48,7 +50,7 @@ When we asked around about doing functional ultrasound with the skull intact, we
 1. High frequency ultrasound waves get distorted when they pass through the skull. If you use traditional ultrasound beamforming and don't account for this distortion, you're bound to fail.
 
 <Figure caption="A 1 MHz ultrasound wave propagating through a skull model, obtained via CT. A 2D solver with no absorption was used for simplicity. ([Jupyter notebook](https://github.com/Brain-Hack-2024/transcranial-ultrasound/blob/main/skull-propagation/skull_propagation.ipynb))">
-<Video src="fus/pressure_animation_1.0MHz.mp4" />
+<Video src={`${R2_URL}/pressure_animation_1.0MHz.mp4`} />
 </Figure>
 
 
@@ -114,7 +116,7 @@ The thing that nobody tells you is that you can buy a real human skull online (s
 Here's what the CT scan looks like. We thought this was really cool! You can access the scan [here](https://drive.google.com/file/d/1_DwyJauas5qvFQ3T0cpL_5P-mgHvKkRE/view?usp=sharing).
 
 <Figure>
-<Video src="fus/ct.mp4"/>
+<Video src={`${R2_URL}/ct.mp4`}/>
 </Figure>
 
 
@@ -138,7 +140,7 @@ The problem is that traditional ultrasound imaging assumes that the medium's spe
 The engine of our algorithm is a wave propagation simulator. It takes in a speed of sound map and source waves, and it simulates waves propagating through the medium.
 
 <Figure>
-<Video src="fus/waves.mp4" />
+<Video src={`${R2_URL}/waves.mp4`} />
 </Figure>
 
 
@@ -205,7 +207,7 @@ We used a [Phillips P4-1](https://www.ebay.com/itm/115853090479) probe that we f
 </ExpandableSection>
 
 <Figure>
-<Video src="fus/skull_jig.mp4" sound controls />
+<Video src={`${R2_URL}/skull_jig.mp4`} sound controls />
 </Figure>
 
 
