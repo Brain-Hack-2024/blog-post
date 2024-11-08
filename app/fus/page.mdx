@@ -56,7 +56,7 @@ When we asked around about doing functional ultrasound with the skull intact, we
 
 2. The skull attenuates ultrasound, so there might not even be enough signal once the ultrasound has passed through the skull and back.
 
-[People](https://www.cambridge.org/core/books/diagnostic-ultrasound/E49EEE09C4081D1EFE1DC457C7D7973C) [often](https://www.sciencedirect.com/book/9780122228001/physical-properties-of-tissues) [quote](https://pubmed.ncbi.nlm.nih.gov/690336/) 22 dB/cm/MHz attenuation of ultrasound. Decibels are a logarithmic scale, so with 1.4 cm of roundtrip skull distance, and typical fUSI frequencies of 10 MHz, this would be 14 orders of magnitude of attenuation! In physics, there's a word for 14 orders of magnitude of attenuation. It's called zero, i.e., you will measure nothing.
+[People](https://www.cambridge.org/core/books/diagnostic-ultrasound/E49EEE09C4081D1EFE1DC457C7D7973C) [often](https://www.sciencedirect.com/book/9780122228001/physical-properties-of-tissues) [quote](https://pubmed.ncbi.nlm.nih.gov/690336/) 22 dB/cm/MHz attenuation of ultrasound. Decibels are a logarithmic scale, so with 1.4 cm of roundtrip skull distance, and typical fUSI frequencies of 10 MHz, this would be 15 orders of magnitude of attenuation! In physics, there's a word for 15 orders of magnitude of attenuation. It's called zero, i.e., you will measure nothing.
 
 But where did the 22 dB/cm/MHz attenuation number come from? We were skeptical of the methods used to measure this.
 
@@ -290,3 +290,13 @@ A big thank you to:
 
 ### Code
 The whole project is open source. You can find the code on our [GitHub repository](https://github.com/brain-hack-2024/transcranial-ultrasound/).
+
+
+<div className="text-gray-500 text-xs mt-20">
+
+---
+
+Changelog
+* Nov 7: Fix calculation error. "14 orders of magnitude" -> "15 orders of magnitude"
+
+</div>
